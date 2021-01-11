@@ -1,7 +1,20 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [];
+import { ResumeSearchComponent } from './components/page_components/resume-search/resume-search.component';
+import {TutorialsListComponent} from './components/tutorials-list/tutorials-list.component';
+import {TutorialDetailsComponent} from './components/tutorial-details/tutorial-details.component';
+import { AddTutorialComponent } from './components/add-tutorial/add-tutorial.component';
+import { CalculatorHomeComponent } from './components/page_components/calculator-home/calculator-home.component';
+
+const routes: Routes = [
+
+  { path: 'resumesearch', component: ResumeSearchComponent },
+  
+  { path: 'calc', component: CalculatorHomeComponent },
+
+  { path: '', redirectTo: '/resumesearch', pathMatch: 'full' },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

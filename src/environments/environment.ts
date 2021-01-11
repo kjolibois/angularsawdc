@@ -3,7 +3,19 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  wordpress:{},
+  firebase: {
+    apiKey: "AIzaSyA3uhdtbJUWB59KgvwwSCSbHhxOP12EvcU",
+    authDomain: "careerappext.firebaseapp.com",
+    databaseURL: 'https://careerappext.firebaseio.com',
+    projectId: "careerappext",
+    storageBucket: "careerappext.appspot.com",
+    messagingSenderId: "257993164677",
+    appId: "1:257993164677:web:9c33273561b681a38ba6ec",
+    measurementId: "G-7KFMB662G6"
+
+  }
 };
 
 /*
