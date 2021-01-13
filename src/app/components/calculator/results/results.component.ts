@@ -70,6 +70,7 @@ export class ResultsComponent implements OnInit {
   {value: '083', viewValue: 'Limestone'}
 
  ];
+ currentCounty:County =this.options[0];
  displayFn(user?: County): string | undefined {
    console.log(user)
   return user ? user.viewValue : undefined;
@@ -78,6 +79,10 @@ export class ResultsComponent implements OnInit {
  constructor(private calculatorService: CalculatorService) { }
  getOptionText(option) {
   return option.viewValue;
+}
+onSelectChange(event){
+  console.log(event);
+  this.currentCounty=event.option.value;
 }
   ngOnInit() {
     this.filteredOptions = this.myControl.valueChanges
