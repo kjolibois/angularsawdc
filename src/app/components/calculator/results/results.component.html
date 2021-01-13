@@ -1,17 +1,11 @@
 <mat-card [@resultState]="getResultState()">
-    <i
-      class="material-icons button"
-      style="float: right; cursor: pointer"
-      (click)="setResultState('hide')"
-    >close</i>
     <mat-card-header>
-      <h4 class="mat-title">Results</h4>
     </mat-card-header>
     <mat-card-content id="result">
         <form class="example-form">
             <mat-form-field class="example-full-width">
               <input type="text" placeholder="Pick one" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
-              <mat-autocomplete  #auto="matAutocomplete" [displayWith]="displayFn">
+              <mat-autocomplete (optionSelected)="onSelectChange($event)" #auto="matAutocomplete" [displayWith]="displayFn">
                 <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                     {{ option.viewValue }}
                 </mat-option>
@@ -23,7 +17,7 @@
         <h4
           style="margin-bottom: 0"
           matTooltip="Mortgage default insurance is required on all mortgages with down payments of less than 20%, which are known as high ratio mortgages."
-        >Monthly Income</h4>
+        >Monthly Income {{currentCounty.viewValue}}</h4>
         <p class="mat-body-2">$ {{ getMonthlyIncome() | number:'1.0-0' }}</p>
       </div>
   

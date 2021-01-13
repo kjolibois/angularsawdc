@@ -1,0 +1,68 @@
+@import '~/src/styles.sass'
+
+.main-div
+  display: flex
+  justify-content: center
+  align-items: center
+
+h4
+    text-align: center
+
+p
+    text-align: center
+
+.mat-form-field-infix 
+    width: 300px !important
+    border: 1px solid $aw-red
+
+.example-full-width 
+    width: 100%
+
+.mat-card
+    background-color: $aw-red
+
+.mat-form-field-appearance-legacy .mat-form-field-label
+    color: $aw-black !important
+
+.mat-primary .mat-option.mat-selected:not(.mat-option-disabled)
+    color: $aw-red !important
+
+.mat-button 
+    background-color: white
+    color: $aw-red !important
+    font-size: 19px
+    margin: auto !important
+    display: block
+    text-align: center
+
+.mat-primary .mat-option.mat-selected:not(.mat-option-disabled)
+    color: white !important  
+
+.mat-option.mat-active
+    color: white !important 
+
+.mat-select-arrow
+    color: white !important 
+
+.mat-card-actions 
+    display: block
+    margin: auto !important
+    text-align: center
+
+.mat-form-field-flex .mat-form-field-infix 
+    border: 1px solid white !important
+
+::ng-deep .mat-focused .mat-form-field-label 
+  /*change color of label*/
+  color: $aw-black !important
+ 
+
+::ng-deep.mat-form-field-underline 
+  /*change color of underline*/
+  background-color: $aw-black !important
+
+
+::ng-deep.mat-form-field-ripple 
+ /*change color of underline when focused*/
+ background-color: $aw-black !important
+
