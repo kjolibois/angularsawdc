@@ -32,16 +32,16 @@ export class PurchaseDetailsComponent implements OnInit, DoCheck {
  currentCountyTotal=2000;
 
  options:County[] =     [ 
-  {value: "001", viewValue: 'Autauga',averageUtility:0,averageInternet:0,averagePhoneBill:0,averageCable:0,averageRent:0},
-  {value: '005', viewValue: 'Barbour',averageUtility:100,averageInternet:100,averagePhoneBill:100,averageCable:100,averageRent:100},
-  {value: '007', viewValue: 'Bibb',averageUtility:200,averageInternet:200,averagePhoneBill:200,averageCable:200,averageRent:200},
-  {value: '009', viewValue: 'Blount',averageUtility:300,averageInternet:300,averagePhoneBill:300,averageCable:300,averageRent:300},
-  {value: '003', viewValue: 'Baldwin',averageUtility:400,averageInternet:400,averagePhoneBill:400,averageCable:400,averageRent:400},
-  {value: '037', viewValue: 'Bullock',averageUtility:500,averageInternet:500,averagePhoneBill:500,averageCable:500,averageRent:500},
+  {value: "001", viewValue: 'Autauga',averageCar:0,averageGroceries:0,averageUtilities:0,averageInternet:0,averagePhoneBill:0,averageCable:0,averageHousingCost:0},
+  {value: '005', viewValue: 'Barbour',averageCar:0,averageGroceries:0,averageUtilities:100,averageInternet:100,averagePhoneBill:100,averageCable:100,averageHousingCost:100},
+  {value: '007', viewValue: 'Bibb',averageCar:0,averageGroceries:0,averageUtilities:200,averageInternet:200,averagePhoneBill:200,averageCable:200,averageHousingCost:200},
+  {value: '009', viewValue: 'Blount',averageCar:0,averageGroceries:0,averageUtilities:300,averageInternet:300,averagePhoneBill:300,averageCable:300,averageHousingCost:300},
+  {value: '003', viewValue: 'Baldwin',averageCar:0,averageGroceries:0,averageUtilities:400,averageInternet:400,averagePhoneBill:400,averageCable:400,averageHousingCost:400},
+  {value: '037', viewValue: 'Bullock',averageCar:0,averageGroceries:0,averageUtilities:500,averageInternet:500,averagePhoneBill:500,averageCable:500,averageHousingCost:500},
 
-  {value: '037', viewValue: 'Coosa',averageUtility:600,averageInternet:600,averagePhoneBill:600,averageCable:600,averageRent:600},
-  {value: '057', viewValue: 'Fayette',averageUtility:700,averageInternet:700,averagePhoneBill:700,averageCable:700,averageRent:700},
-  {value: '083', viewValue: 'Limestone',averageUtility:800,averageInternet:800,averagePhoneBill:800,averageCable:800,averageRent:800}
+  {value: '037', viewValue: 'Coosa',averageCar:0,averageGroceries:0,averageUtilities:600,averageInternet:600,averagePhoneBill:600,averageCable:600,averageHousingCost:600},
+  {value: '057', viewValue: 'Fayette',averageCar:0,averageGroceries:0,averageUtilities:700,averageInternet:700,averagePhoneBill:700,averageCable:700,averageHousingCost:700},
+  {value: '083', viewValue: 'Limestone',averageCar:0,averageGroceries:0,averageUtilities:800,averageInternet:800,averagePhoneBill:800,averageCable:800,averageHousingCost:800}
 
  ];
  currentCounty:County =this.options[0];
@@ -126,8 +126,8 @@ export class PurchaseDetailsComponent implements OnInit, DoCheck {
        //this.incomeEquivalents.hourly,
        "remove",
        this.currentCounty,
-       this.currentCounty.averageRent,
-       this.currentCounty.averageUtility,
+       this.currentCounty.averageHousingCost,
+       this.currentCounty.averageUtilities,
        this.currentCounty.averagePhoneBill,
        this.currentCounty.averageCable,
        this.currentCounty.averageInternet,

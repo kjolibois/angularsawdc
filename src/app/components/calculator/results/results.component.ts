@@ -7,15 +7,9 @@ import {map} from 'rxjs/operators/';
 
 import { CalculatorService} from '../../../services/calculator.service';
 import { CalculatorStatus } from 'src/app/models/calculatorstatus.model';
-export interface County {
-  value: string;
-  viewValue: string;
-  averageRent:number;
-  averageUtility:number;
-  averagePhoneBill:number;
-  averageCable:number;
-  averageInternet:number;
-}
+import { County } from 'src/app/models/county.model';
+
+
 @Component({
   selector: 'app-results',
   templateUrl: './results.component.html',
@@ -65,19 +59,7 @@ export class ResultsComponent implements OnInit {
   myControl: FormControl = new FormControl();
  currentCountyTotal=2000;
 
- options:County[] =     [ 
-  {value: "001", viewValue: 'Autauga',averageUtility:0,averageInternet:0,averagePhoneBill:0,averageCable:0,averageRent:0},
-  {value: '005', viewValue: 'Barbour',averageUtility:0,averageInternet:0,averagePhoneBill:0,averageCable:0,averageRent:0},
-  {value: '007', viewValue: 'Bibb',averageUtility:0,averageInternet:0,averagePhoneBill:0,averageCable:0,averageRent:0},
-  {value: '009', viewValue: 'Blount',averageUtility:0,averageInternet:0,averagePhoneBill:0,averageCable:0,averageRent:0},
-  {value: '003', viewValue: 'Baldwin',averageUtility:0,averageInternet:0,averagePhoneBill:0,averageCable:0,averageRent:0},
-  {value: '037', viewValue: 'Bullock',averageUtility:0,averageInternet:0,averagePhoneBill:0,averageCable:0,averageRent:0},
 
-  {value: '037', viewValue: 'Coosa',averageUtility:0,averageInternet:0,averagePhoneBill:0,averageCable:0,averageRent:0},
-  {value: '057', viewValue: 'Fayette',averageUtility:0,averageInternet:0,averagePhoneBill:0,averageCable:0,averageRent:0},
-  {value: '083', viewValue: 'Limestone',averageUtility:0,averageInternet:0,averagePhoneBill:0,averageCable:0,averageRent:0}
-
- ];
 
  constructor(private calculatorService: CalculatorService) { }
  status: CalculatorStatus =this.calculatorService.calculatorState
@@ -90,10 +72,7 @@ export class ResultsComponent implements OnInit {
       }
     );
   }
-  filter(val?: string): County[] {
-    return this.options.filter(option =>
-      option.viewValue.toLowerCase().indexOf(val.toLowerCase()) === 0);
-  }
+
   updateSetting(event){
     console.log("silder")
      console.log(event);
