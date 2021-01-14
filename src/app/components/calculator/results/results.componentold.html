@@ -1,15 +1,31 @@
-<mat-card [@resultState]="getResultState()">
-  <!--<div [@resultState]="getResultState()">-->
+<div [@resultState]="getResultState()">
 
+
+<mat-card >
+    <i
+      class="material-icons button"
+      style="float: right; cursor: pointer"
+      (click)="setResultState('hide')"
+    >close</i>
     <mat-card-header>
+      <h4 class="mat-title">Results</h4>
     </mat-card-header>
     <mat-card-content id="result">
+        <form class="example-form">
+          <mat-form-field>
+            <mat-select placeholder="Select County">
+                <mat-option *ngFor="let option of options" [value]="option">
+                    {{ option.viewValue }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
 
+          </form>
       <div class="flex-containter">
       <div class="mat-subheading-1 my-centered" *ngIf="needMortgageInsurance()">
         <h4
           style="margin-bottom: 0"
-        >Monthly Income {{status.currentCounty.viewValue}}</h4>
+        >Monthly Income</h4>
         <p class="mat-body-2">$ {{ getMonthlyIncome() | number:'1.0-0' }}</p>
       </div>
   
@@ -30,8 +46,11 @@
   
   
     </mat-card-content>
-  
+
   </mat-card>
+
+
+
   <mat-card  >
     <mat-card-header class="mat-title">
         Monthly Expenses
@@ -75,7 +94,7 @@
             <mat-slider thumbLabel 
             (change)="updateSetting($event)"
 
-            [(ngModel)]="status.currentUtilities" 
+            [(ngModel)]="status.utilities" 
             min="1" 
             max="1000" 
             step="0.5" 
@@ -89,7 +108,7 @@
                 
                 type="number"
                 class="editable-input"
-                [(ngModel)]="status.currentUtilities">
+                [(ngModel)]="status.utilities">
           </td>
         </tr>
  
@@ -101,7 +120,7 @@
           <mat-slider thumbLabel 
             (change)="updateSetting($event)"
 
-          [(ngModel)]="status.currentHousingCost" 
+          [(ngModel)]="status.housingCost" 
           min="1" 
           max="3000" 
           step="0.5" 
@@ -113,7 +132,7 @@
                 matInput
                 type="number"
                 class="editable-input"
-                [(ngModel)]="status.currentHousingCost">
+                [(ngModel)]="status.housingCost">
           </td>
         </tr>
 
@@ -123,7 +142,7 @@
           <mat-slider thumbLabel 
           (change)="updateSetting($event)"
 
-          [(ngModel)]="status.currentPhoneBill" 
+          [(ngModel)]="status.phone" 
           min="1" 
           max="1000" 
           step="0.5" 
@@ -135,7 +154,7 @@
                 matInput
                 type="number"
                 class="editable-input"
-                [(ngModel)]="status.currentPhoneBill">
+                [(ngModel)]="status.phone">
           </td>
         </tr>
 
@@ -143,7 +162,7 @@
           <td>Cable</td>
           <td>
           <mat-slider thumbLabel 
-          [(ngModel)]="status.currentCable" 
+          [(ngModel)]="status.cable" 
           (change)="updateSetting($event)"
 
           min="1" 
@@ -156,7 +175,7 @@
                 matInput
                 type="number"
                 class="editable-input"
-                [(ngModel)]="status.currentCable">
+                [(ngModel)]="status.cable">
           </td>
         </tr>
 
@@ -164,7 +183,7 @@
             <td>Car</td>
             <td>
             <mat-slider thumbLabel 
-            [(ngModel)]="status.currentCar" 
+            [(ngModel)]="status.car" 
             (change)="updateSetting($event)"
 
             min="1" 
@@ -177,7 +196,7 @@
                   matInput
                   type="number"
                   class="editable-input"
-                  [(ngModel)]="status.currentCar">
+                  [(ngModel)]="status.car">
             </td>
           </tr>
 
@@ -185,7 +204,7 @@
             <td>Groceries</td>
             <td>
             <mat-slider thumbLabel 
-            [(ngModel)]="status.currentGroceries" 
+            [(ngModel)]="status.groceries" 
             (change)="updateSetting($event)"
 
             min="1" 
@@ -198,7 +217,7 @@
                   matInput
                   type="number"
                   class="editable-input"
-                  [(ngModel)]="status.currentGroceries">
+                  [(ngModel)]="status.groceries">
             </td>
           </tr>
 
@@ -206,7 +225,7 @@
           <td s>Internet</td>
           <td >
             <mat-slider thumbLabel 
-            [(ngModel)]="status.currentInternet" 
+            [(ngModel)]="status.internet" 
             (change)="updateSetting($event)"
 
             min="1" 
@@ -219,7 +238,7 @@
                 matInput
                 type="number"
                 class="editable-input"
-                [(ngModel)]="status.currentInternet">
+                [(ngModel)]="status.internet">
           </td>
         </tr>
         <tr class="my-centered">
@@ -235,5 +254,4 @@
   </mat-card>
 
   
-<!--</div>-->
-  <app-month-expense *ngIf="isExpenseVisible"></app-month-expense>
+</div>

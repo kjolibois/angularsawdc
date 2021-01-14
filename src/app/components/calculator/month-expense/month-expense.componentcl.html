@@ -1,83 +1,42 @@
 
 
-    <mat-card  >
+    <mat-card (change)="getTotalMonthlyExpense()">
         <mat-card-header class="mat-title">
-            Monthly Expenses
         </mat-card-header>
-      
         <mat-card-content>
-            <form class="example-form">
-                <mat-form-field class="example-full-width">
-                  <input type="text"  placeholder="Pick one" aria-label="text" matInput [formControl]="myControl" [matAutocomplete]="auto">
-                  <mat-autocomplete  (optionSelected)="onSelectChange($event)" #auto="matAutocomplete" [displayWith]="displayFn">
-                    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                        {{ option.viewValue }}
-                    </mat-option>
-                  </mat-autocomplete>
-                </mat-form-field>
-              </form>
+              <h3 style="margin-bottom: 0; padding-right: 12px;">Monthly Income:
+                {{ getMonthlyIncome() | number:'1.0-0' }}
+              </h3>
           <table
             class="mat-body-1 full-width"
             >
-
-            <tr class="full-width">
-              <td>Monthly Income</td>
-              <td>
-                <mat-slider thumbLabel 
-                (change)="updateSetting($event)"
-                [(ngModel)]="status.monthlyIncome" 
-                min="1" 
-                max="1000" 
-                step="0.5" 
-                value="1.5"></mat-slider>                 
-              </td>
-              
-             
-              <td>
-                <input
-              (change)="updateSetting($event)"
-
-                  matInput
-                  
-                  type="number"
-                  class="editable-input"
-                  [(ngModel)]="status.monthlyIncome">
-            </td>
-            </tr>
-
-  
             <tr>
               <td>Utilities</td>
               <td>
                 <mat-slider thumbLabel 
                 (change)="updateSetting($event)"
-
-                [(ngModel)]="status.utilities" 
+                [(ngModel)]="utilities" 
                 min="1" 
                 max="1000" 
                 step="0.5" 
-                value="1.5"></mat-slider>                 </td>
+                value="1.5"></mat-slider>
+              </td>
               
               <td>
                   <input
                 (change)="updateSetting($event)"
-
-                    matInput
-                    
+                    matInput                    
                     type="number"
                     class="editable-input"
-                    [(ngModel)]="status.utilities">
+                    [(ngModel)]="utilities">
               </td>
             </tr>
             <tr>
-                <td></td>
-                <td>
+                <td colspan="3">
                    Average {{currentCounty.viewValue}} Utilities Cost:
-                </td>
-                <td>
-      
-                </td>
-              </tr>
+                <br/></td>
+            </tr>
+            <tr></tr>
             <tr>
               <td>Rent/Mortgage</td>
               <td>
@@ -86,7 +45,7 @@
               <mat-slider thumbLabel 
                 (change)="updateSetting($event)"
 
-              [(ngModel)]="status.housingCost" 
+              [(ngModel)]="housingCost" 
               min="1" 
               max="3000" 
               step="0.5" 
@@ -98,16 +57,12 @@
                     matInput
                     type="number"
                     class="editable-input"
-                    [(ngModel)]="status.housingCost">
+                    [(ngModel)]="housingCost">
               </td>
             </tr>
             <tr>
-                <td></td>
-                <td>
+                <td colspan="3">
                    Average {{currentCounty.viewValue}} Rent/Mortgage:
-                </td>
-                <td>
-      
                 </td>
               </tr>
             <tr>
@@ -116,7 +71,7 @@
               <mat-slider thumbLabel 
               (change)="updateSetting($event)"
 
-              [(ngModel)]="status.phone" 
+              [(ngModel)]="phone" 
               min="1" 
               max="1000" 
               step="0.5" 
@@ -128,23 +83,19 @@
                     matInput
                     type="number"
                     class="editable-input"
-                    [(ngModel)]="status.phone">
+                    [(ngModel)]="phone">
               </td>
             </tr>
             <tr>
-                <td></td>
-                <td>
+                <td colspan="3">
                    Average {{currentCounty.viewValue}} Phone Cost:
-                </td>
-                <td>
-      
                 </td>
               </tr>
             <tr>
               <td>Cable</td>
               <td>
               <mat-slider thumbLabel 
-              [(ngModel)]="status.cable" 
+              [(ngModel)]="cable" 
               (change)="updateSetting($event)"
 
               min="1" 
@@ -157,23 +108,19 @@
                     matInput
                     type="number"
                     class="editable-input"
-                    [(ngModel)]="status.cable">
+                    [(ngModel)]="cable">
               </td>
             </tr>
             <tr>
-                <td></td>
-                <td>
+                <td colspan="3">
                    Average {{currentCounty.viewValue}} Cable Cost:
-                </td>
-                <td>
-      
                 </td>
               </tr>
             <tr>
                 <td>Car</td>
                 <td>
                 <mat-slider thumbLabel 
-                [(ngModel)]="status.car" 
+                [(ngModel)]="car" 
                 (change)="updateSetting($event)"
 
                 min="1" 
@@ -186,23 +133,19 @@
                       matInput
                       type="number"
                       class="editable-input"
-                      [(ngModel)]="status.car">
+                      [(ngModel)]="car">
                 </td>
               </tr>
               <tr>
-                <td></td>
-                <td>
+                <td colspan="3">
                    Average {{currentCounty.viewValue}} Car Cost:
-                </td>
-                <td>
-      
                 </td>
               </tr>
             <tr>
                 <td>Groceries</td>
                 <td>
                 <mat-slider thumbLabel 
-                [(ngModel)]="status.groceries" 
+                [(ngModel)]="groceries" 
                 (change)="updateSetting($event)"
 
                 min="1" 
@@ -215,23 +158,19 @@
                       matInput
                       type="number"
                       class="editable-input"
-                      [(ngModel)]="status.groceries">
+                      [(ngModel)]="groceries">
                 </td>
               </tr>
               <tr>
-                <td></td>
-                <td>
+                <td colspan="3">
                    Average {{currentCounty.viewValue}} groceries Cost:
-                </td>
-                <td>
-      
                 </td>
               </tr>
             <tr>
               <td s>Internet</td>
               <td >
                 <mat-slider thumbLabel 
-                [(ngModel)]="status.internet" 
+                [(ngModel)]="internet" 
                 (change)="updateSetting($event)"
 
                 min="1" 
@@ -244,15 +183,20 @@
                     matInput
                     type="number"
                     class="editable-input"
-                    [(ngModel)]="status.internet">
+                    [(ngModel)]="internet">
               </td>
             </tr>
+            <tr style="border-bottom: 0.7pt solid #000">
+                <td colspan="3">
+                   Average {{currentCounty.viewValue}} Internet Cost:
+                </td>
+              </tr>
             <tr class="my-centered">
               <td style="border-bottom: 0">Total</td>
               <td style="border-bottom: 0">
               </td>
               <td style="border-bottom: 0; padding-right: 12px;">
-                <p>{{ status.total  }}</p>
+                <p>{{ total  }}</p>
               </td>
             </tr>
           </table>

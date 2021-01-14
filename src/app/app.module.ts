@@ -45,6 +45,8 @@ import {MatSliderModule} from '@angular/material/slider';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { ProfileComponent } from './components/page-components/profile/profile.component';
+import { CurrencyMaskModule } from "ng2-currency-mask";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,6 +66,7 @@ import { ProfileComponent } from './components/page-components/profile/profile.c
   ],
   imports: [
     BrowserModule,
+    CurrencyMaskModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     AppRoutingModule,   
@@ -98,8 +101,7 @@ import { ProfileComponent } from './components/page-components/profile/profile.c
     MatExpansionModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule, 
+
     MatSliderModule,
     MatGridListModule,
     MatAutocompleteModule,

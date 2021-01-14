@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup,FormBuilder, FormControl } from '@angular/forms';
 import { MatSliderChange } from '@angular/material/slider';
 import { Observable } from 'rxjs';
@@ -21,6 +21,7 @@ export interface County {
 
 })
 export class MonthExpenseComponent implements OnInit {
+ 
   myControl: FormControl = new FormControl();
   optionsCounties:County[] =     [ 
     {value: "001", viewValue: 'Autauga',averageUtility:0,averageInternet:0,averagePhoneBill:0,averageCable:0,averageRent:0},
@@ -46,21 +47,24 @@ export class MonthExpenseComponent implements OnInit {
     this.currentCounty=event.option.value;
   }
    filteredOptions: Observable<County[]>;
-  
-  monthlyIncome= this.getMonthlyIncome();
-  car = 400;
-  groceries = 0;
-  utilities = 300;
-  housingCost = 50;
-  phone = 40;
-  cable = 60;
-  internet = 45;
-  total = 0;
-
+   status={
+  monthlyIncome: 0,
+  car : 400,
+  groceries : 0,
+  utilities : 300,
+  housingCost : 50,
+  phone : 40,
+  cable : 60,
+  internet :45,
+  total : 0
+   }
   constructor(private calculatorService: CalculatorService,private formBuilder: FormBuilder) { }
   onSliderChange(event: MatSliderChange) {
     console.log("This is emitted as the thumb slides");
     console.log(event);
+    this.getTotalMonthlyExpense();
+  }
+  ngOnChanges(){
     this.getTotalMonthlyExpense();
   }
   ngOnInit() {
@@ -84,7 +88,10 @@ export class MonthExpenseComponent implements OnInit {
      map(name => name ? this.filter(name) : this.optionsCounties.slice())
           );
           this.getTotalMonthlyExpense();
+          this.status.monthlyIncome= this.calculatorService.monthlyIncome;
+
   }
+
   filter(val?: string): County[] {
     return this.optionsCounties.filter(option =>
       option.viewValue.toLowerCase().indexOf(val.toLowerCase()) === 0);
@@ -104,17 +111,17 @@ export class MonthExpenseComponent implements OnInit {
 
     this.getTotalMonthlyExpense()  }
 
-  getMonthlyIncome() {
-    return this.calculatorService.monthlyIncome;
-  }
+ 
   getTotalMonthlyExpense() {
     console.log("working");
-    console.log(this.housingCost);
-    var debits= (this.car + this.utilities+ this.housingCost +this.groceries + this.phone + this.cable + this.internet);
+    console.log(this.status.housingCost);
+    var debits= (this.status.car + this.status.utilities+ this.status.housingCost +this.status.groceries + this.status.phone 
+      + this.status.cable + this.status.internet);
     console.log(debits);
-    console.log(this.monthlyIncome);
-    console.log(this.monthlyIncome-debits);
-    this.total =   this.monthlyIncome -debits
+    console.log(this.status.monthlyIncome);
+    console.log(this.status.monthlyIncome-debits);
+    this.status.total =   this.status.monthlyIncome -debits
     
   }
+
 };

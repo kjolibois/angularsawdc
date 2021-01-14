@@ -6,9 +6,15 @@ import {startWith} from 'rxjs/operators/';
 import {map} from 'rxjs/operators/';
 
 import { CalculatorService} from '../../../services/calculator.service';
+import { CalculatorStatus } from 'src/app/models/calculatorstatus.model';
 export interface County {
   value: string;
   viewValue: string;
+  averageRent:number;
+  averageUtility:number;
+  averagePhoneBill:number;
+  averageCable:number;
+  averageInternet:number;
 }
 @Component({
   selector: 'app-results',
@@ -54,47 +60,59 @@ export interface County {
   ]
 })
 export class ResultsComponent implements OnInit {
+  
   isExpenseVisible = false;
   myControl: FormControl = new FormControl();
  currentCountyTotal=2000;
-  options:County[] =     [ 
-  {value: "001", viewValue: 'Autauga'},
-  {value: '005', viewValue: 'Barbour'},
-  {value: '007', viewValue: 'Bibb'},
-  {value: '009', viewValue: 'Blount'},
-  {value: '003', viewValue: 'Baldwin'},
-  {value: '037', viewValue: 'Bullock'},
 
-  {value: '037', viewValue: 'Coosa'},
-  {value: '057', viewValue: 'Fayette'},
-  {value: '083', viewValue: 'Limestone'}
+ options:County[] =     [ 
+  {value: "001", viewValue: 'Autauga',averageUtility:0,averageInternet:0,averagePhoneBill:0,averageCable:0,averageRent:0},
+  {value: '005', viewValue: 'Barbour',averageUtility:0,averageInternet:0,averagePhoneBill:0,averageCable:0,averageRent:0},
+  {value: '007', viewValue: 'Bibb',averageUtility:0,averageInternet:0,averagePhoneBill:0,averageCable:0,averageRent:0},
+  {value: '009', viewValue: 'Blount',averageUtility:0,averageInternet:0,averagePhoneBill:0,averageCable:0,averageRent:0},
+  {value: '003', viewValue: 'Baldwin',averageUtility:0,averageInternet:0,averagePhoneBill:0,averageCable:0,averageRent:0},
+  {value: '037', viewValue: 'Bullock',averageUtility:0,averageInternet:0,averagePhoneBill:0,averageCable:0,averageRent:0},
+
+  {value: '037', viewValue: 'Coosa',averageUtility:0,averageInternet:0,averagePhoneBill:0,averageCable:0,averageRent:0},
+  {value: '057', viewValue: 'Fayette',averageUtility:0,averageInternet:0,averagePhoneBill:0,averageCable:0,averageRent:0},
+  {value: '083', viewValue: 'Limestone',averageUtility:0,averageInternet:0,averagePhoneBill:0,averageCable:0,averageRent:0}
 
  ];
- displayFn(user?: County): string | undefined {
-   console.log(user)
-  return user ? user.viewValue : undefined;
-}
- filteredOptions: Observable<County[]>;
- constructor(private calculatorService: CalculatorService) { }
- getOptionText(option) {
-  return option.viewValue;
-}
-  ngOnInit() {
-    this.filteredOptions = this.myControl.valueChanges
-    .pipe(
-      startWith<string | County>(''),
-      map(value => typeof value === 'string' ? value : value.viewValue),
-      map(name => name ? this.filter(name) : this.options.slice())      );
 
-      
+ constructor(private calculatorService: CalculatorService) { }
+ status: CalculatorStatus =this.calculatorService.calculatorState
+   ngOnInit() {
+    this.calculatorService.calculatorStateUpdated.subscribe(
+      (istatus) => {
+        console.log(istatus);
+        this.status = this.calculatorService.getCS();
+        this.getTotalMonthlyExpense()
+      }
+    );
   }
   filter(val?: string): County[] {
     return this.options.filter(option =>
       option.viewValue.toLowerCase().indexOf(val.toLowerCase()) === 0);
   }
+  updateSetting(event){
+    console.log("silder")
+     console.log(event);
+     this.getTotalMonthlyExpense()
+   }
 
   getMonthlyIncome() {
     return this.calculatorService.monthlyIncome;
+  }
+  getTotalMonthlyExpense() {
+    console.log("working");
+    console.log(this.status.currentHousingCost);
+    var debits= (this.status.currentCar + this.status.currentUtilities+ this.status.currentHousingCost +this.status.currentGroceries + this.status.currentPhoneBill 
+      + this.status.currentCable + this.status.currentInternet);
+    console.log(debits);
+    console.log(this.status.monthlyIncome);
+    console.log(this.status.monthlyIncome-debits);
+    this.status.total =   this.status.monthlyIncome -debits
+    
   }
   getMortgageRequired() {
     return this.calculatorService.mortgage.mortgageRequired;
