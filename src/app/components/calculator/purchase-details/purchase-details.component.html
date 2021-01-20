@@ -19,9 +19,17 @@
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
+                        <mat-form-field>
+                          <mat-select formControlName="county" (selectionChange)="onSelectChange($event)" placeholder="Select County">
+                              <mat-option *ngFor="let option of options" [value]="option">
+                                  {{ option.viewValue }}
+                              </mat-option>
+                          </mat-select>
+                      </mat-form-field>
+                
                     <mat-form-field class="example-full-width">
                         <input matInput (ngModelChange)="calcIncEquivs($event)" type="number" placeholder="Salary"
-                            formControlName="income" required>
+                            formControlName="income" required/>
                     </mat-form-field>
                     
                 </form>
@@ -42,9 +50,5 @@
 
     </mat-card-content>
 
-    <mat-card-actions>
-        <button class="md-raised md-cornered" mat-button class="mat-button" [disabled]="this.purchaseForm.invalid" (click)="onCalculateMortgage()"
-            required>Calculate</button>
-    </mat-card-actions>
 </mat-card>
 </div>

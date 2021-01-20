@@ -6,10 +6,10 @@ import {startWith} from 'rxjs/operators/';
 import {map} from 'rxjs/operators/';
 
 import { CalculatorService} from '../../../services/calculator.service';
-export interface County {
-  value: string;
-  viewValue: string;
-}
+import { CalculatorStatus } from 'src/app/models/calculatorstatus.model';
+import { County } from 'src/app/models/county.model';
+
+
 @Component({
   selector: 'app-results',
   templateUrl: './results.component.html',
@@ -54,52 +54,46 @@ export interface County {
   ]
 })
 export class ResultsComponent implements OnInit {
-  isExpenseVisible = false;
+  
+  isExpenseVisible = true;
   myControl: FormControl = new FormControl();
- currentCountyTotal=2000;
-  options:County[] =     [ 
-  {value: "001", viewValue: 'Autauga'},
-  {value: '005', viewValue: 'Barbour'},
-  {value: '007', viewValue: 'Bibb'},
-  {value: '009', viewValue: 'Blount'},
-  {value: '003', viewValue: 'Baldwin'},
-  {value: '037', viewValue: 'Bullock'},
+  disposableincome=2000;
 
-  {value: '037', viewValue: 'Coosa'},
-  {value: '057', viewValue: 'Fayette'},
-  {value: '083', viewValue: 'Limestone'}
 
- ];
- currentCounty:County =this.options[0];
- displayFn(user?: County): string | undefined {
-   console.log(user)
-  return user ? user.viewValue : undefined;
-}
- filteredOptions: Observable<County[]>;
+
  constructor(private calculatorService: CalculatorService) { }
- getOptionText(option) {
-  return option.viewValue;
-}
-onSelectChange(event){
-  console.log(event);
-  this.currentCounty=event.option.value;
-}
-  ngOnInit() {
-    this.filteredOptions = this.myControl.valueChanges
-    .pipe(
-      startWith<string | County>(''),
-      map(value => typeof value === 'string' ? value : value.viewValue),
-      map(name => name ? this.filter(name) : this.options.slice())      );
+ status: CalculatorStatus =this.calculatorService.calculatorState
+   ngOnInit() {
+    this.calculatorService.calculatorStateUpdated.subscribe(
+      (istatus) => {
+        console.log(istatus);
+        console.log("emitter")
+        this.status = this.calculatorService.getCS();
+        this.getTotalMonthlyExpense()
+;        this.getDisposable();
+      }
+    );
+  }
 
-      
-  }
-  filter(val?: string): County[] {
-    return this.options.filter(option =>
-      option.viewValue.toLowerCase().indexOf(val.toLowerCase()) === 0);
-  }
+  updateSetting(event){
+    console.log("silder")
+     console.log(event);
+     this.getTotalMonthlyExpense()
+   }
 
   getMonthlyIncome() {
     return this.calculatorService.monthlyIncome;
+  }
+  getTotalMonthlyExpense() {
+    console.log("working");
+    var debits= (this.status.currentTransportationEstimates + this.status.currentFoodEstimates+  
+      +this.status.currentHealthEstimates + this.status.currentHousingPlusUtilitiesEstimates
+      + this.status.currentOtherNecessitiesEstimates+this.status.currentTaxEstimates);
+    console.log(debits);
+    console.log(this.status.monthlyIncome);
+    console.log(this.status.monthlyIncome-debits);
+    this.status.total =   this.status.monthlyIncome -debits
+    
   }
   getMortgageRequired() {
     return this.calculatorService.mortgage.mortgageRequired;
@@ -111,7 +105,11 @@ onSelectChange(event){
     return this.calculatorService.isMortgageInsured();
   }
   getDisposable(){
-    return this.calculatorService.monthlyIncome -this.currentCountyTotal;
+    console.log("disp");
+    console.log(this.calculatorService.calculatorState.monthlyIncome- this.status.currentCounty.monthlyTotal)
+    console.log(this.calculatorService.calculatorState.monthlyIncome);
+    console.log(this.status.currentMonthlyTotal);
+    this.disposableincome = (this.calculatorService.calculatorState.monthlyIncome- this.status.currentCounty.monthlyTotal);
   }
   getResultState() {
     

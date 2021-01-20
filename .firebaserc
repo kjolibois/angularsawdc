@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "careerappext": {
+      "hosting": {
+        "career-ext": [
+          "careerappext"
+        ]
+      }
+    }
+  }
+}

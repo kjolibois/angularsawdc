@@ -12,6 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ProfileEditorComponent } from './components/profile-editor/profile-editor.component';
 import { NameEditorComponent } from './components/name-editor/name-editor.component';
 import { ResumeSearchComponent } from './components/page_components/resume-search/resume-search.component';
+import { NgxCurrencyModule } from "ngx-currency";
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule  } from  '@angular/material/toolbar';
@@ -45,6 +46,8 @@ import {MatSliderModule} from '@angular/material/slider';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { ProfileComponent } from './components/page-components/profile/profile.component';
+import { CurrencyMaskModule } from "ng2-currency-mask";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,6 +67,7 @@ import { ProfileComponent } from './components/page-components/profile/profile.c
   ],
   imports: [
     BrowserModule,
+    CurrencyMaskModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     AppRoutingModule,   
@@ -98,8 +102,8 @@ import { ProfileComponent } from './components/page-components/profile/profile.c
     MatExpansionModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule, 
+    NgxCurrencyModule,
+
     MatSliderModule,
     MatGridListModule,
     MatAutocompleteModule,
