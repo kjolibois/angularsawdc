@@ -15,8 +15,10 @@ export class CalculatorService {
     0,
     0,
     0,
-    "remove",
-    new County("001","Autauga",100,200,300,400,500,600,700)
+    
+    new County("001","Autauga",0,0,0,0,0,0,0,0,0)
+    ,0
+    ,0
     ,0
     ,0
     ,0

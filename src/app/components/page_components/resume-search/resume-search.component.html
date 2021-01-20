@@ -5,12 +5,12 @@
   <button (click)="getResume(searchBox.value)" >search</button>
 
 
-  <div class="comeBack_up" *ngIf="(resumes$.length ==  0)">
+  <div class="comeBack_up" *ngIf="(joblogs$.length ==  0)">
 
-    no resume found
+    no record found
   </div>
     <div class="search-result">
-    <div *ngFor="let currentSubmission of resumes$; let first=first;" >
+    <div *ngFor="let currentSubmission of joblogs$; let first=first;" >
       <mat-accordion>
         <mat-expansion-panel *ngIf="first">
           <mat-expansion-panel-header>
@@ -33,38 +33,45 @@
                 </mat-card-title>
               </mat-card-header>
               <mat-card-content>
+                
+                <form [formGroup]="newJobForm" (ngSubmit)="onNJFSubmit()">                
                 <mat-form-field>
-                  <input matInput  placeholder="Job Title" >
+                  <input matInput  formControlName="jobTitle" placeholder="Job Title" >
                 </mat-form-field>
                 <mat-form-field>
-                  <input matInput  placeholder="City" >
+                  <input matInput formControlName="companyName" placeholder="Company Name" >
                 </mat-form-field>
                 <mat-form-field>
-                  <input matInput  placeholder="State" >
+                  <input matInput formControlName="city" placeholder="City" >
                 </mat-form-field>
                 <mat-form-field>
-                  <input matInput [matDatepicker]="startdate" placeholder="Start Date">
+                  <input matInput formControlName="state" placeholder="State" >
+                </mat-form-field>
+                <mat-form-field>
+                  <input matInput formControlName="startDate" [matDatepicker]="startdate" placeholder="Start Date">
                   <mat-datepicker-toggle matSuffix [for]="startdate"></mat-datepicker-toggle>
                   <mat-datepicker touchUi="true" #startdate></mat-datepicker>
                 </mat-form-field>
                 <mat-form-field>
-                  <input matInput [matDatepicker]="enddate" placeholder="End Date">
+                  <input matInput formControlName="endDate" [matDatepicker]="enddate" placeholder="End Date">
                   <mat-datepicker-toggle matSuffix [for]="enddate"></mat-datepicker-toggle>
                   <mat-datepicker touchUi="true" #enddate></mat-datepicker>
                 </mat-form-field>
-                <mat-form-field>
-                  <input matInput  placeholder="End Date" >
-                </mat-form-field>
+
                 <mat-form-field>
                   <input matInput  placeholder="Notes" >
                 </mat-form-field>
-                 <button> Save New Info</button>   
+                <button type="submit" >Add new Job</button>
+
+                 
                  <button (click)="toggleNewJobs()">Cancel</button>   
+                </form>
 
               </mat-card-content>
             </mat-card>
+</div>
+         <form [formGroup]="allEditForm" (ngSubmit)="onEditSubmit()">
 
-           </div>
           <div  *ngFor="let job of currentSubmission.job_log">
             <div *ngIf="editJobs==true">
             <mat-card >
@@ -76,36 +83,38 @@
               </button>
                 </mat-card-title>
               </mat-card-header>
+              <!--<div formArrayName="jobs">-->
+                <div formGroupName="{{'joblog-'+currentSubmission._id+'-'+job.jobnumber}}">
               <mat-card-content>
+                  
                 <mat-form-field>
-                  <input matInput  placeholder="Job Title" value="{{job.jobtitle}}">
+                  <input matInput     (change)="onChangeEvent($event,'joblog-'+currentSubmission.id+'-'+job.jobnumber)"  placeholder="Job Title" formControlName="jobTitle">
                 </mat-form-field>
                 <mat-form-field>
-                  <input matInput  placeholder="City" value="{{job.city}}">
+                  <input matInput  placeholder="City" formControlName="city">
                 </mat-form-field>
                 <mat-form-field>
-                  <input matInput  placeholder="State" value="{{job.state}}">
+                  <input matInput  placeholder="State" formControlName="state">
                 </mat-form-field>
                 <mat-form-field>
-                  <input matInput [matDatepicker]="startdate" placeholder="Start Date">
+                  <input matInput formControlName="startDate" [matDatepicker]="startdate" placeholder="Start Date">
                   <mat-datepicker-toggle matSuffix [for]="startdate"></mat-datepicker-toggle>
                   <mat-datepicker touchUi="true" #startdate></mat-datepicker>
                 </mat-form-field>
                 <mat-form-field>
-                  <input matInput [matDatepicker]="enddate" placeholder="End Date">
+                  <input matInput formControlName="endDate" [matDatepicker]="enddate" placeholder="End Date">
                   <mat-datepicker-toggle matSuffix [for]="enddate"></mat-datepicker-toggle>
                   <mat-datepicker touchUi="true" #enddate></mat-datepicker>
                 </mat-form-field>
-                <mat-form-field>
-                  <input matInput  placeholder="End Date" value="{{job.enddate}}">
-                </mat-form-field>
-                <mat-form-field>
-                  <input matInput  placeholder="Notes" value="{{job.notes}}">
-                </mat-form-field>
-                 <button> Save New Info</button>   
-                 <button (click)="toggleEdit()">Cancel</button>   
 
+                <mat-form-field>
+                  <input matInput formControlName="notes" placeholder="Notes" value="{{job.notes}}">
+                </mat-form-field>
+                 <button > Save New Info</button>   
+                 <button (click)="toggleEdit()">Cancel</button>   
               </mat-card-content>
+                            </div>
+
             </mat-card>
             </div>
             <div  *ngIf="editJobs== false">
@@ -139,6 +148,7 @@
              <br/>
             
               </div>
+            </form>
 
 
 

@@ -1,5 +1,5 @@
-<mat-card [@resultState]="getResultState()">
-  <!--<div [@resultState]="getResultState()">-->
+<div [@resultState]="getResultState()">
+<mat-card >
 
     <mat-card-header>
     </mat-card-header>
@@ -9,22 +9,22 @@
       <div class="mat-subheading-1 my-centered" *ngIf="needMortgageInsurance()">
         <h4
           style="margin-bottom: 0"
-        >Monthly Income {{status.currentCounty.viewValue}}</h4>
-        <p class="mat-body-2">$ {{ getMonthlyIncome() | number:'1.0-0' }}</p>
+        >Monthly Income </h4>
+        <p class="mat-body-2">$ {{ status.monthlyIncome | number:'1.0-0' }}</p>
       </div>
   
       <div class="mat-subheading-1 my-centered">
         <h4
           style="margin-bottom: 0"
           matTooltip="Mortgage required = Total price - Down payment + mortgage insurance"
-        >Average Monthly COL for County</h4>
-        <p class="mat-body-2">$ {{ currentCountyTotal | number:'1.0-0' }}</p>
+        >Average Monthly COL for {{status.currentCounty.viewValue}} County</h4>
+        <p class="mat-body-2">$ {{ status.currentCounty.monthlyTotal | number:'1.0-0' }}</p>
       </div>
       </div>
       <br>
       <div class="my-centered">
         <h2>Disposable Income</h2>
-        <h2>{{ getDisposable() | currency:'USD':true:'1.0-0' }}</h2>
+        <h2>{{ this.disposableincome | currency:'USD':true:'1.0-0' }}</h2>
       </div>
       <br>
   
@@ -49,10 +49,10 @@
             <mat-slider thumbLabel 
             (change)="updateSetting($event)"
             [(ngModel)]="status.monthlyIncome" 
-            min="1" 
-            max="1000" 
-            step="0.5" 
-            value="1.5"></mat-slider>                 
+            min="10" 
+            max="10000" 
+            step="10" 
+            value="0"></mat-slider>                 
           </td>
           
          
@@ -68,52 +68,50 @@
         </td>
         </tr>
 
-
         <tr>
-          <td>Utilities</td>
-          <td>
-            <mat-slider thumbLabel 
-            (change)="updateSetting($event)"
-
-            [(ngModel)]="status.currentUtilities" 
-            min="1" 
-            max="1000" 
-            step="0.5" 
-            value="1.5"></mat-slider>                 </td>
-          
-          <td>
-              <input
-            (change)="updateSetting($event)"
-
-                matInput
-                
-                type="number"
-                class="editable-input"
-                [(ngModel)]="status.currentUtilities">
-          </td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>
-             Average {{status.currentCounty.viewValue}} Utilities Cost:{{status.currentCounty.averageUtilities}}
-          </td>
-          <td>
-
-          </td>
-        </tr>
-        <tr>
-          <td>Rent/Mortgage</td>
+          <td>Housing + Utilities</td>
           <td>
               
 
           <mat-slider thumbLabel 
             (change)="updateSetting($event)"
 
-          [(ngModel)]="status.currentHousingCost" 
+          [(ngModel)]="status.currentHousingPlusUtilitiesEstimates" 
+          min="0" 
+          max="2000" 
+          step="10" 
+          value="0"></mat-slider>    
+          </td>
+          <td>
+
+              <input
+
+                matInput
+               
+                type="number"
+                class="editable-input"
+                [(ngModel)]="status.currentHousingPlusUtilitiesEstimates">
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+             Average {{status.currentCounty.viewValue}} Utilities Cost:{{status.currentCounty.housingPlusUtilitiesEstimates}}
+          </td>
+          <td>
+
+          </td>
+        </tr>
+        <tr>
+          <td>Food</td>
+          <td>
+          <mat-slider thumbLabel 
+          (change)="updateSetting($event)"
+          [(ngModel)]="status.currentFoodEstimates" 
           min="1" 
-          max="3000" 
-          step="0.5" 
-          value="1.5"></mat-slider>    
+          max="400" 
+          step="10" 
+          value="0"></mat-slider>    
           </td>
           <td>
 
@@ -121,170 +119,162 @@
                 matInput
                 type="number"
                 class="editable-input"
-                [(ngModel)]="status.currentHousingCost">
+                [(ngModel)]="status.currentFoodEstimates">
           </td>
         </tr>
         <tr>
           <td></td>
           <td>
-             Average {{status.currentCounty.viewValue}} Utilities Cost:{{status.currentCounty.averageUtilities}}
+             Average {{status.currentCounty.viewValue}} Utilities Cost:{{status.currentCounty.foodEstimates}}
           </td>
           <td>
 
           </td>
         </tr>
         <tr>
-          <td>Phone</td>
+          <td>Transportation</td>
           <td>
           <mat-slider thumbLabel 
-          (change)="updateSetting($event)"
-
-          [(ngModel)]="status.currentPhoneBill" 
-          min="1" 
-          max="1000" 
-          step="0.5" 
-          value="1.5"></mat-slider>    
-          </td>
-          <td>
-
-              <input
-                matInput
-                type="number"
-                class="editable-input"
-                [(ngModel)]="status.currentPhoneBill">
-          </td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>
-             Average {{status.currentCounty.viewValue}} Utilities Cost:{{status.currentCounty.averageUtilities}}
-          </td>
-          <td>
-
-          </td>
-        </tr>
-        <tr>
-          <td>Cable</td>
-          <td>
-          <mat-slider thumbLabel 
-          [(ngModel)]="status.currentCable" 
+          [(ngModel)]="status.currentTransportationEstimates" 
           (change)="updateSetting($event)"
 
           min="1" 
           max="1000" 
-          step="0.5" 
-          value="1.5"></mat-slider>
+          step="10" 
+          value="1"></mat-slider>
           </td>    
           <td>
               <input
                 matInput
                 type="number"
                 class="editable-input"
-                [(ngModel)]="status.currentCable">
+                [(ngModel)]="status.currentTransportationEstimates">
           </td>
         </tr>
         <tr>
           <td></td>
           <td>
-             Average {{status.currentCounty.viewValue}} Utilities Cost:{{status.currentCounty.averageUtilities}}
+             Average {{status.currentCounty.viewValue}} Transportation Costs:{{status.currentCounty.transportationEstimates}}
           </td>
           <td>
 
           </td>
         </tr>
         <tr>
-            <td>Car</td>
-            <td>
-            <mat-slider thumbLabel 
-            [(ngModel)]="status.currentCar" 
-            (change)="updateSetting($event)"
+          <td>Gas</td>
+          <td>
+          <mat-slider thumbLabel 
+          [(ngModel)]="status.currentHealthEstimates" 
+          (change)="updateSetting($event)"
 
-            min="1" 
-            max="1000" 
-            step="0.5" 
-            value="1.5"></mat-slider>
-            </td>    
-            <td>
-                <input
-                  matInput
-                  type="number"
-                  class="editable-input"
-                  [(ngModel)]="status.currentCar">
-            </td>
-          </tr>
-          <tr>
-            <td></td>
-            <td>
-               Average {{status.currentCounty.viewValue}} Utilities Cost:{{status.currentCounty.averageUtilities}}
-            </td>
-            <td>
-  
-            </td>
-          </tr>
-        <tr>
-            <td>Groceries</td>
-            <td>
-            <mat-slider thumbLabel 
-            [(ngModel)]="status.currentGroceries" 
-            (change)="updateSetting($event)"
-
-            min="1" 
-            max="1000" 
-            step="0.5" 
-            value="1.5"></mat-slider>
-            </td>    
-            <td>
-                <input
-                  matInput
-                  type="number"
-                  class="editable-input"
-                  [(ngModel)]="status.currentGroceries">
-            </td>
-          </tr>
-          <tr>
-            <td></td>
-            <td>
-               Average {{status.currentCounty.viewValue}} Utilities Cost:{{status.currentCounty.averageUtilities}}
-            </td>
-            <td>
-  
-            </td>
-          </tr>
-        <tr>
-          <td >Internet</td>
-          <td >
-            <mat-slider thumbLabel 
-            [(ngModel)]="status.currentInternet" 
-            (change)="updateSetting($event)"
-
-            min="1" 
-            max="1000" 
-            step="0.5" 
-            value="1.5"></mat-slider>    
-          </td>
-          <td >
+          min="0" 
+          max="300" 
+          step="10" 
+          value="0"></mat-slider>
+          </td>    
+          <td>
               <input
                 matInput
                 type="number"
                 class="editable-input"
-                [(ngModel)]="status.currentInternet">
+                [(ngModel)]="status.currentHealthEstimates">
           </td>
         </tr>
         <tr>
           <td></td>
           <td>
-             Average {{status.currentCounty.viewValue}} Utilities Cost:{{status.currentCounty.averageUtilities}}
+             Average {{status.currentCounty.viewValue}} Gas Cost:{{status.currentCounty.healthEstimates}}
           </td>
           <td>
 
           </td>
         </tr>
+        <tr>
+            <td>Medical Insurance</td>
+            <td>
+            <mat-slider thumbLabel 
+            [(ngModel)]="status.currentHealthEstimates" 
+            (change)="updateSetting($event)"
+            min="0" 
+            max="1000" 
+            step="10" 
+            value="0"></mat-slider>
+            </td>    
+            <td>
+                <input
+                  matInput
+                  type="number"
+                  class="editable-input"
+                  [(ngModel)]="status.currentHealthEstimates">
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>
+               Average {{status.currentCounty.viewValue}} HealthCare Cost:{{status.currentCounty.healthEstimates}}
+            </td>
+            <td>
+  
+            </td>
+          </tr>
+          <tr>
+            <td>Cable & Internet</td>
+            <td>
+            <mat-slider thumbLabel 
+            [(ngModel)]="status.currentOtherNecessitiesEstimates" 
+            (change)="updateSetting($event)"
+
+            min="0" 
+            max="300" 
+            step="10" 
+            value="0"></mat-slider>
+            </td>    
+            <td>
+                <input
+                  matInput
+                  type="number"
+                  class="editable-input"
+                  [(ngModel)]="status.currentOtherNecessitiesEstimates">
+            </td>
+          </tr>
+
+        <tr>
+            <td>Other Necessities</td>
+            <td>
+            <mat-slider thumbLabel 
+            [(ngModel)]="status.currentOtherNecessitiesEstimates" 
+            (change)="updateSetting($event)"
+
+            min="0" 
+            max="500" 
+            step="10" 
+            value="0"></mat-slider>
+            </td>    
+            <td>
+                <input
+                  matInput
+                  type="number"
+                  class="editable-input"
+                  [(ngModel)]="status.currentOtherNecessitiesEstimates">
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>
+               Average {{status.currentCounty.viewValue}} Other Necessities (inc phone) Cost:{{status.currentCounty.otherNecessitiesEstimates}}
+            </td>
+            <td>
+  
+            </td>
+          </tr>
+
+
         <tr class="my-centered">
-          <td style="border-bottom: 0">Total</td>
+          <td style="border-bottom: 0">Disposable Income Remaining: </td>
           <td style="border-bottom: 0">
           </td>
           <td style="border-bottom: 0; padding-right: 12px;">
-            <p>{{ status.total  }}</p>
+            <p>{{ status.total  | currency:'USD':true:'1.0-0'  }}</p>
           </td>
         </tr>
       </table>
@@ -292,5 +282,5 @@
   </mat-card>
 
   
-<!--</div>-->
-  <app-month-expense *ngIf="isExpenseVisible"></app-month-expense>
+</div>
+  <!--<app-month-expense *ngIf="isExpenseVisible"></app-month-expense>-->

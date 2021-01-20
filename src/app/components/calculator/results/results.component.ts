@@ -57,7 +57,7 @@ export class ResultsComponent implements OnInit {
   
   isExpenseVisible = false;
   myControl: FormControl = new FormControl();
- currentCountyTotal=2000;
+  disposableincome=2000;
 
 
 
@@ -67,8 +67,10 @@ export class ResultsComponent implements OnInit {
     this.calculatorService.calculatorStateUpdated.subscribe(
       (istatus) => {
         console.log(istatus);
+        console.log("emitter")
         this.status = this.calculatorService.getCS();
         this.getTotalMonthlyExpense()
+;        this.getDisposable();
       }
     );
   }
@@ -84,9 +86,9 @@ export class ResultsComponent implements OnInit {
   }
   getTotalMonthlyExpense() {
     console.log("working");
-    console.log(this.status.currentHousingCost);
-    var debits= (this.status.currentCar + this.status.currentUtilities+ this.status.currentHousingCost +this.status.currentGroceries + this.status.currentPhoneBill 
-      + this.status.currentCable + this.status.currentInternet);
+    var debits= (this.status.currentTransportationEstimates + this.status.currentFoodEstimates+  
+      +this.status.currentHealthEstimates + this.status.currentHousingPlusUtilitiesEstimates
+      + this.status.currentOtherNecessitiesEstimates+this.status.currentTaxEstimates);
     console.log(debits);
     console.log(this.status.monthlyIncome);
     console.log(this.status.monthlyIncome-debits);
@@ -103,7 +105,11 @@ export class ResultsComponent implements OnInit {
     return this.calculatorService.isMortgageInsured();
   }
   getDisposable(){
-    return this.calculatorService.monthlyIncome -this.currentCountyTotal;
+    console.log("disp");
+    console.log(this.calculatorService.calculatorState.monthlyIncome- this.status.currentCounty.monthlyTotal)
+    console.log(this.calculatorService.calculatorState.monthlyIncome);
+    console.log(this.status.currentMonthlyTotal);
+    this.disposableincome = (this.calculatorService.calculatorState.monthlyIncome- this.status.currentCounty.monthlyTotal);
   }
   getResultState() {
     

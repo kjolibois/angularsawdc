@@ -3,43 +3,49 @@ export class CalculatorStatus {
   public monthlyIncome:number;
   public yearlyIncome:number;
   public weeklyIncome:number;
-  public viewValue: string;
   public currentCounty:County;
-  public currentHousingCost:number;
-  public currentUtilities:number;
-  public currentPhoneBill:number;
-  public currentCable:number;
-  public currentInternet:number;
-  public currentCar:number;
-  public currentGroceries:number;
+  
+  public currentTransportationEstimates: number; 
+  public currentFoodEstimates: number; 
+  public currentHealthEstimates: number; 
 
+  public currentGasEstimates: number; 
+  public currentTaxEstimates: number;
+  public currentOtherNecessitiesEstimates : number; ;
+  public currentHousingPlusUtilitiesEstimates : number; 
+  public currentMonthlyTotal : number; 
+  public currentAnnualTotal : number; 
   public total : number;
      
     constructor (monthlyIncome:number,
       yearlyIncome:number,
       weeklyIncome:number,
-      viewValue: string,
       currentCounty:County,
-      currentHousingCost:number,
-      currentUtilities:number,
-      currentPhoneBill:number,
-      currentCable:number,
-      currentInternet:number,
-      currentGroceries:number,
-      currentCar:number,
+      currentTransportationEstimates: number, 
+      currentFoodEstimates: number, 
+      currentHealthEstimates: number, 
+      currentGasEstimates: number, 
+      currentTaxEstimates: number,
+      currentOtherNecessitiesEstimates : number, 
+      currentHousingPlusUtilitiesEstimates : number, 
+      currentMonthlyTotal : number, 
+      currentAnnualTotal : number, 
       total:number) {
         this.monthlyIncome = monthlyIncome;
         this.yearlyIncome =  yearlyIncome;
-        this.weeklyIncome = weeklyIncome
-        this.viewValue =  viewValue;
+        this.weeklyIncome = weeklyIncome;
         this.currentCounty = currentCounty;
-        this.currentHousingCost = currentHousingCost;
-        this.currentUtilities = currentUtilities;
-        this.currentPhoneBill = currentPhoneBill;
-        this.currentCable = currentCable;
-        this.currentInternet = currentInternet;
-        this.currentGroceries = currentGroceries;
-        this.currentCar= currentCar;
+        this.currentTransportationEstimates=  currentTransportationEstimates;
+        this.currentFoodEstimates= currentFoodEstimates;
+        this.currentHealthEstimates= currentHealthEstimates;
+      
+        this.currentGasEstimates= currentGasEstimates;
+        this.currentTaxEstimates=currentTaxEstimates;
+        this.currentOtherNecessitiesEstimates =  currentOtherNecessitiesEstimates;
+        this.currentHousingPlusUtilitiesEstimates = currentHousingPlusUtilitiesEstimates;
+        this.currentMonthlyTotal = currentMonthlyTotal;
+        this.currentAnnualTotal = currentAnnualTotal;
+      
         this.total= total;
 
     }
