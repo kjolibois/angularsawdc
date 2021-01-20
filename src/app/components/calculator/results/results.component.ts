@@ -55,7 +55,7 @@ import { County } from 'src/app/models/county.model';
 })
 export class ResultsComponent implements OnInit {
   
-  isExpenseVisible = false;
+  isExpenseVisible = true;
   myControl: FormControl = new FormControl();
   disposableincome=2000;
 
