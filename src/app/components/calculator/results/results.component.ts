@@ -69,8 +69,8 @@ export class ResultsComponent implements OnInit {
         console.log(istatus);
         console.log("emitter")
         this.status = this.calculatorService.getCS();
-        this.getTotalMonthlyExpense()
-;        this.getDisposable();
+        this.getTotalMonthlyExpense();
+                this.getDisposable();
       }
     );
   }
