@@ -2,18 +2,19 @@
 <mat-card>
     <mat-card-header>
         <mat-card-title>
-            <h4 class="mat-title">Expense Calculator</h4>
+            <h4 class="mat-title">Monthly Expense Calculator</h4>
             <section class="mat-typography">
-                <p>An important aspect of life is understanding how to create a budget based on your salary. Enter a salary below and adjust the sliders as needed to see your budget.</p>
+                <p>An important aspect of life is understanding how to create a budget based on your salary. Follow the steps below to enter your pay information, select your county and adjust your living expenses to start planning your budget.</p>
               </section>
         </mat-card-title>
     </mat-card-header>
     <br/>
     <mat-card-content>
+        <h1>Step 1: Enter pay information</h1>
                 <form [formGroup]="purchaseForm">
                     <mat-form-field>
                         <mat-select (ngModelChange)="calcIncEquivs($event)" formControlName="period"
-                            placeholder="Select Period">
+                            placeholder="Select Pay Period">
                             <mat-option *ngFor="let periodd of payPeriods" [value]="periodd.value">
                                 {{ periodd.viewValue }}
                             </mat-option>
@@ -28,21 +29,21 @@
                       </mat-form-field>
                 
                     <mat-form-field class="example-full-width">
-                        <input matInput (ngModelChange)="calcIncEquivs($event)" type="number" placeholder="Salary"
+                        <input matTooltip="Amount of money received per unit time" matInput (ngModelChange)="calcIncEquivs($event)" type="number" placeholder="Rate of Pay"
                             formControlName="income" required/>
                     </mat-form-field>
-                    
+                    <span style="display:block">Calculations assume a full-time equivalent of 40 hours a week, 52 weeks a year.</span>
                 </form>
                 <mat-grid-tile-header>
-                    <h3>{{this.purchaseForm.value['income']| currency:'USD':true:'1.0-0'}} per {{incomeEquivalents.inputTypeDisplay}}</h3>
+                    <h3>You selected {{this.purchaseForm.value['income']| currency:'USD':true:'1.0-0'}} per {{incomeEquivalents.inputTypeDisplay}} as your current pay, which equals</h3>
                 </mat-grid-tile-header>
               
 
                 <mat-list>
                     <mat-list-item> Hourly: &nbsp;<b>{{incomeEquivalents.hourly | currency:'USD':true:'1.0-0'}}</b>
                     </mat-list-item>
-                    <mat-list-item> Monthly Salary: &nbsp;<b>{{incomeEquivalents.salaryMonth | currency:'USD':true:'1.0-0'}}</b></mat-list-item>
-                    <mat-list-item> Yearly Salary: &nbsp;<b>{{incomeEquivalents.salaryYear | currency:'USD':true:'1.0-0'}}</b></mat-list-item>
+                    <mat-list-item> Yearly Income: &nbsp;<b>{{incomeEquivalents.salaryYear | currency:'USD':true:'1.0-0'}}</b></mat-list-item>
+                    <mat-list-item><h4>Monthly Income: &nbsp;<b>{{incomeEquivalents.salaryMonth | currency:'USD':true:'1.0-0'}}</b></h4></mat-list-item>   
                 </mat-list>
 
 
