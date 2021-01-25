@@ -5,30 +5,31 @@
     </mat-card-header>
     <mat-card-content id="result">
 
-      <div class="flex-containter">
+      <h1>Step 2: Compare with your County</h1>
+
       <div class="mat-subheading-1 my-centered" *ngIf="needMortgageInsurance()">
-        <h4
-          style="margin-bottom: 0"
-        >Monthly Income </h4>
-        <p class="mat-body-2">$ {{ status.monthlyIncome | number:'1.0-0' }}</p>
-      </div>
-  
-      <div class="mat-subheading-1 my-centered">
-        <h4
-          style="margin-bottom: 0"
-          matTooltip="Mortgage required = Total price - Down payment + mortgage insurance"
-        >Average Monthly COL for {{status.currentCounty.viewValue}} County</h4>
+      <table>
+        <tr>
+          <td>
+            <h4 style="margin-bottom: 0"> Your Monthly Income </h4>
+            <p class="mat-body-2">$ {{ status.monthlyIncome | number:'1.0-0' }}</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <h4 style="margin-bottom: 0" matTooltip="Mortgage required = Total price - Down payment + mortgage insurance"
+        >Average Monthly Cost of Living for {{status.currentCounty.viewValue}} County</h4>
         <p class="mat-body-2">$ {{ status.currentCounty.monthlyTotal | number:'1.0-0' }}</p>
-      </div>
-      </div>
+          </td>
+        </tr>
+      </table>
+      
       <br>
       <div class="my-centered">
-        <h2>Disposable Income</h2>
+        <h2>Monthly Total Remaining:</h2>
         <h2>{{ this.disposableincome | currency:'USD':true:'1.0-0' }}</h2>
       </div>
-      <br>
-  
-  
+    </div>
     </mat-card-content>
   </mat-card>
  
