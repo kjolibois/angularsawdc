@@ -35,15 +35,15 @@
                     <span style="display:block">Calculations assume a full-time equivalent of 40 hours a week, 52 weeks a year.</span>
                 </form>
                 <mat-grid-tile-header>
-                    <h3>You selected {{this.purchaseForm.value['income']| currency:'USD':true:'1.0-0'}} per {{incomeEquivalents.inputTypeDisplay}} as your current pay, which equals</h3>
+                    <h3>You selected {{this.purchaseForm.value['income']| currency:'USD':true:'1.0-0'}} per {{incomeEquivalents.inputTypeDisplay}} as your current pay, which equals:</h3>
                 </mat-grid-tile-header>
               
 
                 <mat-list>
                     <mat-list-item> Hourly: &nbsp;<b>{{incomeEquivalents.hourly | currency:'USD':true:'1.0-0'}}</b>
                     </mat-list-item>
-                    <mat-list-item> Yearly Income: &nbsp;<b>{{incomeEquivalents.salaryYear | currency:'USD':true:'1.0-0'}}</b></mat-list-item>
-                    <mat-list-item><h4>Monthly Income: &nbsp;<b>{{incomeEquivalents.salaryMonth | currency:'USD':true:'1.0-0'}}</b></h4></mat-list-item>   
+                    <mat-list-item><h4>Monthly Income: &nbsp;<span style="color: #de1a21"> {{incomeEquivalents.salaryMonth | currency:'USD':true:'1.0-0'}}</span></h4></mat-list-item> 
+                    <mat-list-item> Yearly Income: &nbsp;<b>{{incomeEquivalents.salaryYear | currency:'USD':true:'1.0-0'}}</b></mat-list-item>  
                 </mat-list>
 
 
