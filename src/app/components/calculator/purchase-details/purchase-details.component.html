@@ -20,13 +20,7 @@
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
-                        <mat-form-field>
-                          <mat-select formControlName="county" (selectionChange)="onSelectChange($event)" placeholder="Select County">
-                              <mat-option *ngFor="let option of options" [value]="option">
-                                  {{ option.viewValue }}
-                              </mat-option>
-                          </mat-select>
-                      </mat-form-field>
+
                 
                     <mat-form-field class="example-full-width">
                         <input matTooltip="Amount of money received per unit time" matInput (ngModelChange)="calcIncEquivs($event)" type="number" placeholder="Rate of Pay"

@@ -24,8 +24,8 @@ export class PurchaseDetailsComponent implements OnInit, DoCheck {
 
   payPeriods = [
     { value: payType.HOUR, viewValue: 'Hourly' },
-    { value: payType.SALARYMONTH, viewValue: 'Monthly Salary' },
-    { value: payType.SALARYYEAR, viewValue: 'Salary Per Year' },
+    { value: payType.SALARYMONTH, viewValue: 'Monthly' },
+    { value: payType.SALARYYEAR, viewValue: 'Yearly' },
 
   ];
   myControl: FormControl = new FormControl();
@@ -161,21 +161,33 @@ export class PurchaseDetailsComponent implements OnInit, DoCheck {
   }
   purchaseForm = this.fb.group({
     income: ['', Validators.required],
-    county: ["", Validators.required],
     period: ['', Validators.required],
   });
   constructor(private calculatorService: CalculatorService,
     private fb: FormBuilder) { }
 
   ngOnInit() {
-    this.purchaseForm.patchValue({
+    this.purchaseForm.setValue({
       income: 0,
-      downPmt: 0,
-      county:this.options[0],
       period: ""
 
     })
-
+    this.calculatorService.incomestateUpdated.subscribe(
+      (istatus) => {
+        console.log(istatus);
+        console.log("emitterhh")
+        this.purchaseForm.setValue({
+          income: istatus.income,
+         
+          
+          period: this.payPeriods[1].value
+    
+         })
+         console.log(this.calculatorService.calculatorState.currentCounty.viewValue)
+         this.currentCounty=istatus.currentCounty;
+         this.onCalculateMortgage();
+          this.calcIncEquivs();
+      })
 
   }
 
@@ -184,13 +196,12 @@ export class PurchaseDetailsComponent implements OnInit, DoCheck {
     //  this.calculatorService.resultState = 'hide';
    // }
   }
-  calcIncEquivs(incomeInput: number) {
+  calcIncEquivs(incomeInput?: number) {
     let income=this.purchaseForm.value['income'];
     
 
     const payToggle = parseInt(this.purchaseForm.value["period"]);
-    console.log("paytogg"+payToggle)
-    console.log(payToggle==payType.HOUR)
+  
     //calculateincome equivalents
     if (payToggle==payType.HOUR) {
        this.incomeEquivalents.hourly = income;
@@ -219,9 +230,9 @@ export class PurchaseDetailsComponent implements OnInit, DoCheck {
     this.onCalculateMortgage();
   }
 
-  onCalculateMortgage() {
-    console.log(this.calculatorService.mortgage);
-    console.log(this.calculatorService.resultState)
+  onCalculateMortgage(recalc?:Boolean) {
+  
+
      //this.calculatorService.isClicked=true;
      this.calculatorService.resultState = 'show';
      this.calculatorService.setIncome(this.purchaseForm.value['income']);
@@ -256,7 +267,6 @@ export class PurchaseDetailsComponent implements OnInit, DoCheck {
     return this.calculatorService.mortgage.downPmt;
   }
   onSelectChange(event){
-    console.log(event.value);
     this.currentCounty=event.value;
     this.onCalculateMortgage();
 

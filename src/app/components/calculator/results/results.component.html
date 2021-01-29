@@ -6,7 +6,13 @@
     <mat-card-content id="result">
 
       <h1>Step 2: Compare with your County</h1>
-
+        <mat-form-field>
+          <mat-select (selectionChange)="onSelectChange($event)" placeholder="Select County">
+              <mat-option *ngFor="let option of options" [value]="option">
+                  {{ option.viewValue }}
+              </mat-option>
+          </mat-select>
+      </mat-form-field>
       <div class="mat-subheading-1 my-centered" *ngIf="needMortgageInsurance()">
             <h4 style="margin-bottom: 0"> Your Monthly Income: ${{ status.monthlyIncome | number:'1.0-0' }}</h4>
             <h4 style="margin-bottom: 0" matTooltip="Mortgage required = Total price - Down payment + mortgage insurance"
@@ -21,7 +27,7 @@
     </mat-card-content>
   </mat-card>
  
-  <app-month-expense *ngIf="isExpenseVisible"></app-month-expense>
+  <app-month-expense  *ngIf="isExpenseVisible"></app-month-expense>
 
 </div>
   <!--<app-month-expense *ngIf="isExpenseVisible"></app-month-expense>-->

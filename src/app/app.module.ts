@@ -45,6 +45,7 @@ import {MatSliderModule} from '@angular/material/slider';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { ProfileComponent } from './components/page-components/profile/profile.component';
+import { HomeComponent } from './components/page_components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { ProfileComponent } from './components/page-components/profile/profile.c
     MonthExpenseComponent,
     CalculatorHomeComponent,
     ProfileComponent,
+    HomeComponent,
     
   ],
   imports: [

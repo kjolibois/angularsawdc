@@ -35,6 +35,7 @@ export class CalculatorService {
   }
   incomeUpdated:EventEmitter<any> = new EventEmitter();
   calculatorStateUpdated:EventEmitter<any> = new EventEmitter();
+  incomestateUpdated:EventEmitter<any> = new EventEmitter();
 
   setIncome(lang) {
     this.monthlyIncome = lang;
@@ -45,6 +46,14 @@ export class CalculatorService {
     console.log(lang);
     this.calculatorState = lang;
     this.calculatorStateUpdated.emit(this.calculatorState);
+  }
+  setincomestate(lang) {
+    
+    this.monthlyIncome = lang.income;
+    var countyInfo = lang.countyInfo;
+
+    this.incomestateUpdated.emit({income:this.monthlyIncome,currentCounty:countyInfo});
+
   }
   getInc() {
     return this.monthlyIncome;
