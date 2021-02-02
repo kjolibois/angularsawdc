@@ -16,10 +16,12 @@ export class ResumeSearchComponent implements OnInit {
   category: '',
   job_log:[]
   };
+  email;
   panelOpenState: boolean = false;
   searchClicked=false;
   joblogs$:Joblog[]=[];
   editInfo:Joblog[]=[];
+  howmanyjobs=0;
   editJobs=false;
   newJobs=false;
   newJobForm = new FormGroup({
@@ -38,7 +40,7 @@ export class ResumeSearchComponent implements OnInit {
     jobs: this.fb.array([
     ])
   });
-
+  currentformControls=[];
   private searchTerm = "";
   private log(message: string) {
     this.messageService.add(`HeroService: ${message}`);
@@ -72,45 +74,66 @@ export class ResumeSearchComponent implements OnInit {
   toggleNewJobs(){
     this.newJobs = !this.newJobs
   }
-  onNJFSubmit() {
+  onNJFSubmit(submissionId:string) {
     // TODO: Use EventEmitter with form value
+    var newjobnumber=this.howmanyjobs +1;
     console.warn(this.newJobForm.value);
+     this.resumeService.addNewJob(submissionId,newjobnumber,this.newJobForm.value).subscribe((data) => {
+      this.getResume(this.email)//console.log(data)
+      this.newJobForm.reset();
+      this.toggleNewJobs();
+     }
+ 
+     );
+     
   }
-  onEditSubmit() {
+  onEditSubmit(submissionId:string) {
     // TODO: Use EventEmitter with form value
-    console.warn(this.newJobForm.value);
+    console.log(submissionId);
+    console.warn(this.allEditForm.value);
+    this.resumeService.update(submissionId,this.allEditForm.value).subscribe((data)=>console.log(data));
+
   }
   saveNewInfo() {
     // TODO: Use EventEmitter with form value
     console.warn(this.newJobForm.value);
+    //this.resumeService.update(this.newJobForm.value)
   }
   getResume(email: string): void {
-  
-   console.log(email)
+    this.email=email;
+    for (var i=0; i<this.currentformControls.length;i++){
+      console.log(this.currentformControls[i])
+      console.log(this.allEditForm.removeControl(this.currentformControls[i]))
+    }
+    this.currentformControls=[];
    this.resumeService.getByEmail(email)
     .subscribe(
       data => {
         let entryGroup = new FormGroup({});
 
         this.joblogs$  = [data];
-        console.log(data)
         console.log("before");
         // data.map((group, index) => {
            //console.log(group);
-           
+           console.log(data)
+
+           this.howmanyjobs=data.job_log.length;
           data.job_log.map((x )=> {
+            console.warn(data._id)
           const controlname = 'joblog-' + data._id +'-'+x.jobnumber;
           console.log(controlname);
           const formGroup = this.fb.group({
+            jobNumber:[x.jobnumber],
             startDate: [x.startdate],
             jobTitle: [x.jobtitle],
-            companyName:[x.companyName],
+            companyName:[x.companyname],
             city:[x.city],
             state:[x.state],
             endDate:[x.enddate],
             notes:[x.notes],
           });
           this.allEditForm.addControl(controlname, formGroup);
+          this.currentformControls.push(controlname);
           //console.log(entryGroup);
          } )
          //this.allEditForm.addControl(group.id, entryGroup);

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-//
-const baseUrl = "https://careerext.herokuapp.com/api/careerlog" //http://localhost:8090/api/careerlog"//"https://careerext.herokuapp.com/api/careerlog";
+//"https://careerext.herokuapp.com/api/careerlog" 
+const baseUrl = "http://localhost:8090/api/careerlog"//https://careerext.herokuapp.com/api/careerlog";
 const options = {
   headers: new HttpHeaders({
     'Content-Type':  'application/json',
@@ -32,9 +32,28 @@ export class ResumeService {
   }
 
   update(id, data): Observable<any> {
-    return this.http.put(`${baseUrl}/${id}`, data);
-  }
+    console.warn(data)
 
+    console.log(id)
+    console.log(`${baseUrl}/${id}`)
+    return this.http.put(`${baseUrl}/${id}`, data,options);
+  }
+  addNewJob(id,jobnumber, data): Observable<any> {
+    console.warn(data)
+    var dto= {
+      jobnumber:jobnumber,
+            jobtitle: data.jobTitle,
+            companyname:data.companyName,
+            city:data.city,
+            state: data.state,
+            startdate:data.startDate,
+            enddate: data.endDate,
+            notes:data.notes
+    }
+
+    console.log(`${baseUrl}/${id}`)
+    return this.http.put(`${baseUrl}/addjob/${id}`, dto,options);
+  }
   delete(id): Observable<any> {
     return this.http.delete(`${baseUrl}/${id}`);
   }
