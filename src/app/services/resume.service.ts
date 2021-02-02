@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 //"https://careerext.herokuapp.com/api/careerlog" 
-const baseUrl = "http://localhost:8090/api/careerlog"//https://careerext.herokuapp.com/api/careerlog";
+const baseUrl = "https://careerext.herokuapp.com/api/careerlog";
 const options = {
   headers: new HttpHeaders({
     'Content-Type':  'application/json',
