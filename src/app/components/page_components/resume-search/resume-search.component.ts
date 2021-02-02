@@ -91,7 +91,14 @@ export class ResumeSearchComponent implements OnInit {
     // TODO: Use EventEmitter with form value
     console.log(submissionId);
     console.warn(this.allEditForm.value);
-    this.resumeService.update(submissionId,this.allEditForm.value).subscribe((data)=>console.log(data));
+    this.resumeService.update(submissionId,this.allEditForm.value).subscribe((data)=> { console.log(data)
+    
+      this.getResume(this.email)//console.log(data)
+      this.toggleEdit();
+    
+    
+    });
+
 
   }
   saveNewInfo() {
