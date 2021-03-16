@@ -46,6 +46,10 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { ProfileComponent } from './components/page-components/profile/profile.component';
 import { HomeComponent } from './components/page_components/home/home.component';
+import { VcwcHomeComponent } from './components/page_components/vcwc/vcwc.component';
+import { AllHomeComponent } from './components/page_components/allhome/allhome.component';
+import { ResumesearchComponent } from './components/vcwc/resumesearch/resumesearch.component';
+import { ResumeadminComponent } from './components/vcwc/resumeadmin/resumeadmin.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +67,10 @@ import { HomeComponent } from './components/page_components/home/home.component'
     CalculatorHomeComponent,
     ProfileComponent,
     HomeComponent,
+    VcwcHomeComponent,
+    AllHomeComponent,
+    ResumesearchComponent,
+    ResumeadminComponent,
     
   ],
   imports: [

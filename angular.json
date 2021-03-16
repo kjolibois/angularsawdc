@@ -130,5 +130,8 @@
       }
     }
   },
-  "defaultProject": "career-ext"
+  "defaultProject": "career-ext",
+  "cli": {
+    "analytics": "7b266cf8-07ae-4cdf-9b63-f1c3f0b76c08"
+  }
 }

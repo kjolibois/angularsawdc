@@ -6,11 +6,11 @@ import { Joblog } from 'src/app/models/joblog.model';
 import { ResumeService } from 'src/app/services/resume.service';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 @Component({
-  selector: 'app-resume-search',
-  templateUrl: './resume-search.component.html',
-  styleUrls: ['./resume-search.component.sass']
+  selector: 'app-resumesearch',
+  templateUrl: './resumesearch.component.html',
+  styleUrls: ['./resumesearch.component.sass']
 })
-export class ResumeSearchComponent implements OnInit {
+export class ResumesearchComponent implements OnInit {
   currentJoblog: Joblog= {
     email: '',
   category: '',
@@ -78,7 +78,7 @@ export class ResumeSearchComponent implements OnInit {
     // TODO: Use EventEmitter with form value
     var newjobnumber=this.howmanyjobs +1;
     console.warn(this.newJobForm.value);
-     this.resumeService.addNewJob('sawdc',submissionId,newjobnumber,this.newJobForm.value).subscribe((data) => {
+     this.resumeService.addNewJob('vcwc',submissionId,newjobnumber,this.newJobForm.value).subscribe((data) => {
       this.getResume(this.email)//console.log(data)
       this.newJobForm.reset();
       this.toggleNewJobs();
@@ -91,7 +91,7 @@ export class ResumeSearchComponent implements OnInit {
     // TODO: Use EventEmitter with form value
     console.log(submissionId);
     console.warn(this.allEditForm.value);
-    this.resumeService.update('sawdc',submissionId,this.allEditForm.value).subscribe((data)=> { console.log(data)
+    this.resumeService.update('vcwc',submissionId,this.allEditForm.value).subscribe((data)=> { console.log(data)
     
       this.getResume(this.email)//console.log(data)
       this.toggleEdit();
@@ -113,7 +113,7 @@ export class ResumeSearchComponent implements OnInit {
       console.log(this.allEditForm.removeControl(this.currentformControls[i]))
     }
     this.currentformControls=[];
-   this.resumeService.getByEmail('sawdc',email)
+   this.resumeService.getByEmail('vcwc',email)
     .subscribe(
       data => {
         let entryGroup = new FormGroup({});
@@ -154,4 +154,3 @@ export class ResumeSearchComponent implements OnInit {
       });
   }
 }
-

@@ -7,13 +7,20 @@ import {TutorialDetailsComponent} from './components/tutorial-details/tutorial-d
 import { AddTutorialComponent } from './components/add-tutorial/add-tutorial.component';
 import { CalculatorHomeComponent } from './components/page_components/calculator-home/calculator-home.component';
 import { HomeComponent} from './components/page_components/home/home.component'
+import {AllHomeComponent} from './components/page_components/allhome/allhome.component'
+import {VcwcHomeComponent} from './components/page_components/vcwc/vcwc.component'
 const routes: Routes = [
 
   { path: 'resumesearch', component: ResumeSearchComponent },
-  
-  { path: 'calc', component: CalculatorHomeComponent },
+  { path: 'vcwc/resumesearch', component: ResumeSearchComponent },
+  { path: 'vcwc/resumeadmin', component: ResumeSearchComponent },
 
-  { path: '', component: HomeComponent },
+  { path: 'calc', component: CalculatorHomeComponent },
+  { path: 'sawdc', component: HomeComponent },
+  { path: 'vcwc', component: VcwcHomeComponent },
+
+
+  { path: '', component: AllHomeComponent },
 ];
 
 @NgModule({
