@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 //"https://careerext.herokuapp.com/api/careerlog" 
 const baseUrl = function(region){
-  return `https://careerext.herokuapp.com/api/${region}/careerlog`;
+  return `https://careerext.herokuapp.com/${region}/api/careerlog`;
 }
   const options = {
   headers: new HttpHeaders({

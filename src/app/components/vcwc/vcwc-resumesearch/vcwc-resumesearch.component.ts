@@ -6,11 +6,11 @@ import { Joblog } from 'src/app/models/joblog.model';
 import { ResumeService } from 'src/app/services/resume.service';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 @Component({
-  selector: 'app-resumesearch',
-  templateUrl: './resumesearch.component.html',
-  styleUrls: ['./resumesearch.component.sass']
+  selector: 'app-vcwc-resumesearch',
+  templateUrl: './vcwc-resumesearch.component.html',
+  styleUrls: ['./vcwc-resumesearch.component.sass']
 })
-export class ResumesearchComponent implements OnInit {
+export class VCWCResumesearchComponent implements OnInit {
   currentJoblog: Joblog= {
     email: '',
   category: '',

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AllHomeComponent } from './allhome.component';
+import { SAWDCResumesearchComponent } from './sawdc-resumesearch.component';
 
-describe('AllHomeComponent', () => {
-  let component: AllHomeComponent;
-  let fixture: ComponentFixture<AllHomeComponent>;
+describe('SAWDCResumesearchComponent', () => {
+  let component: SAWDCResumesearchComponent;
+  let fixture: ComponentFixture<SAWDCResumesearchComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AllHomeComponent ]
+      declarations: [ SAWDCResumesearchComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AllHomeComponent);
+    fixture = TestBed.createComponent(SAWDCResumesearchComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

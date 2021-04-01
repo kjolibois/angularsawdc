@@ -46,11 +46,12 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { ProfileComponent } from './components/page-components/profile/profile.component';
 import { HomeComponent } from './components/page_components/home/home.component';
-import { VcwcHomeComponent } from './components/page_components/vcwc/vcwc.component';
+import { VCWCHomeComponent } from './components/page_components/vcwc/vcwc.component';
 import { AllHomeComponent } from './components/page_components/allhome/allhome.component';
-import { ResumesearchComponent } from './components/vcwc/resumesearch/resumesearch.component';
-import { ResumeadminComponent } from './components/vcwc/resumeadmin/resumeadmin.component';
-
+import { SAWDCResumesearchComponent } from './components/sawdc/sawdc-resumesearch/sawdc-resumesearch.component';
+import { SAWDCResumeadminComponent } from './components/sawdc/sawdc-resumeadmin/sawdc-resumeadmin.component';
+import {VCWCResumesearchComponent} from './components/vcwc/vcwc-resumesearch/vcwc-resumesearch.component'
+import {VCWCResumeadminComponent} from './components/vcwc/vcwc-resumeadmin/vcwc-resumeadmin.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -67,10 +68,12 @@ import { ResumeadminComponent } from './components/vcwc/resumeadmin/resumeadmin.
     CalculatorHomeComponent,
     ProfileComponent,
     HomeComponent,
-    VcwcHomeComponent,
+    VCWCHomeComponent,
+    VCWCResumeadminComponent,
+    VCWCResumesearchComponent,
     AllHomeComponent,
-    ResumesearchComponent,
-    ResumeadminComponent,
+    SAWDCResumesearchComponent,
+    SAWDCResumeadminComponent,
     
   ],
   imports: [

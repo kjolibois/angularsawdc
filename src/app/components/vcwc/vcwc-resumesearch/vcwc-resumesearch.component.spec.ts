@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ResumesearchComponent } from './resumesearch.component';
+import { VCWCResumesearchComponent } from './vcwc-resumesearch.component';
 
-describe('ResumesearchComponent', () => {
-  let component: ResumesearchComponent;
-  let fixture: ComponentFixture<ResumesearchComponent>;
+describe('VCWCResumesearchComponent', () => {
+  let component: VCWCResumesearchComponent;
+  let fixture: ComponentFixture<VCWCResumesearchComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ResumesearchComponent ]
+      declarations: [ VCWCResumesearchComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ResumesearchComponent);
+    fixture = TestBed.createComponent(VCWCResumesearchComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

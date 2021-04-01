@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AllHomeComponent } from './allhome.component';
+import { VCWCResumeadminComponent } from './vcwc-resumeadmin.component';
 
-describe('AllHomeComponent', () => {
-  let component: AllHomeComponent;
-  let fixture: ComponentFixture<AllHomeComponent>;
+describe('ResumeadminComponent', () => {
+  let component: VCWCResumeadminComponent;
+  let fixture: ComponentFixture<VCWCResumeadminComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AllHomeComponent ]
+      declarations: [ VCWCResumeadminComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AllHomeComponent);
+    fixture = TestBed.createComponent(VCWCResumeadminComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

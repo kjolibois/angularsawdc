@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './vcwc.component.html',
   styleUrls: ['./vcwc.component.sass']
 })
-export class VcwcHomeComponent implements OnInit {
+export class VCWCHomeComponent implements OnInit {
   title = 'CentralVA Home';
 
   constructor() { }
