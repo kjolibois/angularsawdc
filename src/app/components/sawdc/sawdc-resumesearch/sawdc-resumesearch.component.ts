@@ -6,11 +6,11 @@ import { Joblog } from 'src/app/models/joblog.model';
 import { ResumeService } from 'src/app/services/resume.service';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 @Component({
-  selector: 'app-resume-search',
-  templateUrl: './resume-search.component.html',
-  styleUrls: ['./resume-search.component.sass']
+  selector: 'app-sawdc-resumesearch',
+  templateUrl: './sawdc-resumesearch.component.html',
+  styleUrls: ['./sawdc-resumesearch.component.sass']
 })
-export class ResumeSearchComponent implements OnInit {
+export class SAWDCResumesearchComponent implements OnInit {
   currentJoblog: Joblog= {
     email: '',
   category: '',
@@ -154,4 +154,3 @@ export class ResumeSearchComponent implements OnInit {
       });
   }
 }
-

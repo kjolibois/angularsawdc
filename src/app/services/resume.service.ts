@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-//"https://careerext.herokuapp.com/api/careerlog" 
-const baseUrl = "https://careerext.herokuapp.com/api/careerlog";
-const options = {
+//`https://careerext.herokuapp.com/${region}/api/careerlog`
+const baseUrl = function(region){
+  return `http://localhost:8090/${region}/api/careerlog`;
+}
+  const options = {
   headers: new HttpHeaders({
     'Content-Type':  'application/json',
   
@@ -16,29 +18,32 @@ export class ResumeService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(): Observable<any> {
-    return this.http.get(baseUrl);
+  getAll(region,data): Observable<any> {
+    return this.http.get(baseUrl(region));
   }
 
-  get(id): Observable<any> {
-    return this.http.get(`${baseUrl}/${id}`);
+  get(region,id): Observable<any> {
+    return this.http.get(`${baseUrl(region)}/${id}`);
   }
-  getByEmail(email): Observable<any> {
-    return this.http.get(`${baseUrl}/il/${email}`);
+  getByEmail(region,email): Observable<any> {
+    return this.http.get(`${baseUrl(region)}/il/${email}`);
+  }
+  getByTags(region,tags): Observable<any> {
+    console.log(tags)
+    return this.http.post(`${baseUrl(region)}/tagsearch`,tags);
+  }
+  create(region,data): Observable<any> {
+    return this.http.post(baseUrl(region), data);
   }
 
-  create(data): Observable<any> {
-    return this.http.post(baseUrl, data);
-  }
-
-  update(id, data): Observable<any> {
+  update(region,id, data): Observable<any> {
     console.warn(data)
 
     console.log(id)
-    console.log(`${baseUrl}/${id}`)
-    return this.http.put(`${baseUrl}/${id}`, data,options);
+    console.log(`${baseUrl(region)}/${id}`)
+    return this.http.put(`${baseUrl(region)}/${id}`, data,options);
   }
-  addNewJob(id,jobnumber, data): Observable<any> {
+  addNewJob(region,id,jobnumber, data): Observable<any> {
     console.warn(data)
     var dto= {
       jobnumber:jobnumber,
@@ -51,19 +56,19 @@ export class ResumeService {
             notes:data.notes
     }
 
-    console.log(`${baseUrl}/${id}`)
-    return this.http.put(`${baseUrl}/addjob/${id}`, dto,options);
+    console.log(`${baseUrl(region)}/${id}`)
+    return this.http.put(`${baseUrl(region)}/addjob/${id}`, dto,options);
   }
-  delete(id): Observable<any> {
-    return this.http.delete(`${baseUrl}/${id}`);
-  }
-
-  deleteAll(): Observable<any> {
-    return this.http.delete(baseUrl);
+  delete(region,id): Observable<any> {
+    return this.http.delete(`${baseUrl(region)}/${id}`);
   }
 
-  findByTitle(title): Observable<any> {
-    return this.http.get(`${baseUrl}?title=${title}`);
+  deleteAll(region): Observable<any> {
+    return this.http.delete(baseUrl(region));
+  }
+
+  findByTitle(region,title): Observable<any> {
+    return this.http.get(`${baseUrl(region)}?title=${title}`);
   }
 }
 

@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.sass']
 })
 export class HomeComponent implements OnInit {
-  title = 'career-ext';
+  title = 'SAWDC Home';
 
   constructor() { }
 

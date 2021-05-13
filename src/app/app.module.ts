@@ -46,7 +46,15 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { ProfileComponent } from './components/page-components/profile/profile.component';
 import { HomeComponent } from './components/page_components/home/home.component';
+import { VCWCHomeComponent } from './components/page_components/vcwc/vcwc.component';
+import { AllHomeComponent } from './components/page_components/allhome/allhome.component';
+import { SAWDCResumesearchComponent } from './components/sawdc/sawdc-resumesearch/sawdc-resumesearch.component';
+import { SAWDCResumeadminComponent } from './components/sawdc/sawdc-resumeadmin/sawdc-resumeadmin.component';
+import {VCWCEmailSearchComponent} from './components/vcwc/vcwc-resume-email-search/vcwc-resume-email-search.component'
+import {VCWCTagSearchComponent} from './components/vcwc/vcwc-resume-tag-search/vcwc-resume-tag-search.component'
 
+import {VCWCResumeadminComponent} from './components/vcwc/vcwc-resumeadmin/vcwc-resumeadmin.component';
+import { ChipSelectComponent } from './components/chip-select/chip-select.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -63,6 +71,15 @@ import { HomeComponent } from './components/page_components/home/home.component'
     CalculatorHomeComponent,
     ProfileComponent,
     HomeComponent,
+    VCWCHomeComponent,
+    VCWCResumeadminComponent,    
+    VCWCTagSearchComponent,
+    VCWCEmailSearchComponent,
+
+    AllHomeComponent,
+    SAWDCResumesearchComponent,
+    SAWDCResumeadminComponent,
+    ChipSelectComponent,
     
   ],
   imports: [
