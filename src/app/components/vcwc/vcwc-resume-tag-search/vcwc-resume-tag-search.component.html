@@ -227,8 +227,8 @@
                    <mat-list-item> Company: {{job.companyname}}</mat-list-item>
                    <mat-list-item> City: {{job.city}} </mat-list-item>
                    <mat-list-item> State: {{job.state}} </mat-list-item>
-                   <mat-list-item> Start Date: {{job.startdate}} </mat-list-item>
-                   <mat-list-item> End Date:  {{job.enddate}} </mat-list-item>
+                   <mat-list-item> Start Date: {{job.startdate | date}} </mat-list-item>
+                   <mat-list-item> End Date:  {{job.enddate | date}} </mat-list-item>
                    <mat-list-item> Notes {{job.notes}}</mat-list-item>
 <!--
                    <mat-list-item> Tags:          
