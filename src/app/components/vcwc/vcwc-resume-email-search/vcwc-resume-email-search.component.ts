@@ -6,11 +6,11 @@ import { Joblog } from 'src/app/models/joblog.model';
 import { ResumeService } from 'src/app/services/resume.service';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 @Component({
-  selector: 'app-vcwc-resumesearch',
-  templateUrl: './vcwc-resumesearch.component.html',
-  styleUrls: ['./vcwc-resumesearch.component.sass']
+  selector: 'app-resume-vcwc-email-search',
+  templateUrl: './vcwc-resume-email-search.component.html',
+  styleUrls: ['./vcwc-resume-email-search.component.sass']
 })
-export class VCWCResumesearchComponent implements OnInit {
+export class VCWCEmailSearchComponent implements OnInit {
   currentJoblog: Joblog= {
     email: '',
   category: '',
@@ -78,7 +78,7 @@ export class VCWCResumesearchComponent implements OnInit {
     // TODO: Use EventEmitter with form value
     var newjobnumber=this.howmanyjobs +1;
     console.warn(this.newJobForm.value);
-     this.resumeService.addNewJob('vcwc',submissionId,newjobnumber,this.newJobForm.value).subscribe((data) => {
+     this.resumeService.addNewJob('sawdc',submissionId,newjobnumber,this.newJobForm.value).subscribe((data) => {
       this.getResume(this.email)//console.log(data)
       this.newJobForm.reset();
       this.toggleNewJobs();
@@ -91,7 +91,7 @@ export class VCWCResumesearchComponent implements OnInit {
     // TODO: Use EventEmitter with form value
     console.log(submissionId);
     console.warn(this.allEditForm.value);
-    this.resumeService.update('vcwc',submissionId,this.allEditForm.value).subscribe((data)=> { console.log(data)
+    this.resumeService.update('sawdc',submissionId,this.allEditForm.value).subscribe((data)=> { console.log(data)
     
       this.getResume(this.email)//console.log(data)
       this.toggleEdit();
@@ -113,7 +113,7 @@ export class VCWCResumesearchComponent implements OnInit {
       console.log(this.allEditForm.removeControl(this.currentformControls[i]))
     }
     this.currentformControls=[];
-   this.resumeService.getByEmail('vcwc',email)
+   this.resumeService.getByEmail('sawdc',email)
     .subscribe(
       data => {
         let entryGroup = new FormGroup({});

@@ -10,11 +10,15 @@ import { CalculatorHomeComponent } from './components/page_components/calculator
 import { HomeComponent} from './components/page_components/home/home.component'
 import {AllHomeComponent} from './components/page_components/allhome/allhome.component'
 import {VCWCHomeComponent} from './components/page_components/vcwc/vcwc.component'
-import { VCWCResumesearchComponent } from './components/vcwc/vcwc-resumesearch/vcwc-resumesearch.component';
+import { VCWCEmailSearchComponent } from './components/vcwc/vcwc-resume-email-search/vcwc-resume-email-search.component';
+
+import { VCWCTagSearchComponent } from './components/vcwc/vcwc-resume-tag-search/vcwc-resume-tag-search.component';
 const routes: Routes = [
 
   { path: 'sawdc/resumesearch', component: SAWDCResumesearchComponent },
-  { path: 'vcwc/resumesearch', component: VCWCResumesearchComponent },
+  { path: 'vcwc/tag-search', component: VCWCTagSearchComponent },
+  { path: 'vcwc/email-search', component: VCWCEmailSearchComponent },
+
   { path: 'vcwc/resumeadmin', component: ResumeSearchComponent },
 
   { path: 'calc', component: CalculatorHomeComponent },

@@ -1,0 +1,32 @@
+<mat-form-field>
+    <mat-label>Toppings</mat-label>
+    <mat-select [formControl]="toppingsControl" multiple>
+  
+      <mat-select-trigger>
+        <mat-chip-list>
+          <mat-chip *ngFor="let topping of toppingsControl.value" [removable]="true"
+            (removed)="onToppingRemoved(topping)">
+            {{ topping.viewValue }}
+            <mat-icon matChipRemove>cancel</mat-icon>
+          </mat-chip>
+        </mat-chip-list>
+      </mat-select-trigger>
+  
+      <mat-option *ngFor="let topping of toppingList" [value]="topping"> {{topping.viewValue}}</mat-option>
+  
+    </mat-select>
+  </mat-form-field>
+  
+  <br/>
+  <!--
+  <div *ngFor="let topping of toppingsControl.value">
+    <p> {{topping.viewValue}}</p>
+  </div>
+  {{ toppingsControl.value | json }}-->
+  
+  <br/>
+  <button mat-button (click)="changeSelection()">Search</button>
+  <button mat-button (click)="emptySelection()">Empty</button>
+  <!-- Copyright 2019 Google LLC. All Rights Reserved.
+      Use of this source code is governed by an MIT-style license that
+      can be found in the LICENSE file at http://angular.io/license -->

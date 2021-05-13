@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-//"https://careerext.herokuapp.com/api/careerlog" 
+//`https://careerext.herokuapp.com/${region}/api/careerlog`
 const baseUrl = function(region){
-  return `https://careerext.herokuapp.com/${region}/api/careerlog`;
+  return `http://localhost:8090/${region}/api/careerlog`;
 }
   const options = {
   headers: new HttpHeaders({
@@ -28,7 +28,10 @@ export class ResumeService {
   getByEmail(region,email): Observable<any> {
     return this.http.get(`${baseUrl(region)}/il/${email}`);
   }
-
+  getByTags(region,tags): Observable<any> {
+    console.log(tags)
+    return this.http.post(`${baseUrl(region)}/tagsearch`,tags);
+  }
   create(region,data): Observable<any> {
     return this.http.post(baseUrl(region), data);
   }

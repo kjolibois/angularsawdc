@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { VCWCResumesearchComponent } from './vcwc-resumesearch.component';
+import { ChipSelectComponent } from './chip-select.component';
 
-describe('VCWCResumesearchComponent', () => {
-  let component: VCWCResumesearchComponent;
-  let fixture: ComponentFixture<VCWCResumesearchComponent>;
+describe('ChipSelectComponent', () => {
+  let component: ChipSelectComponent;
+  let fixture: ComponentFixture<ChipSelectComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ VCWCResumesearchComponent ]
+      declarations: [ ChipSelectComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(VCWCResumesearchComponent);
+    fixture = TestBed.createComponent(ChipSelectComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

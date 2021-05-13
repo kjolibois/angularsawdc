@@ -1,0 +1,288 @@
+<div id="search-component">
+    <h4><label for="search-box">Resume Search</label></h4>
+    <mat-form-field>
+      <mat-label>Job Categories</mat-label>
+      <mat-select #sl [formControl]="toppingsControl" multiple>
+    
+        <mat-select-trigger>
+          <mat-chip-list>
+            <mat-chip *ngFor="let topping of toppingsControl.value" [removable]="true"
+              (removed)="onToppingRemoved(topping)">
+              {{ topping.viewValue }}
+              <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+          </mat-chip-list>
+        </mat-select-trigger>
+    
+        <mat-option *ngFor="let topping of toppingList" [value]="topping"> {{topping.viewValue}}</mat-option>
+    		<button (click)="sl.close()">Apply</button>
+
+      </mat-select>
+    </mat-form-field>
+    
+    <br/>
+    <!--
+    <div *ngFor="let topping of toppingsControl.value">
+      <p> {{topping.viewValue}}</p>
+    </div>
+    {{ toppingsControl.value | json }}-->
+    
+    <br/>
+    <button mat-button (click)="getResumesByTags(toppingsControl.value)">Search</button>
+    <button mat-button (click)="emptySelection()">Empty</button>
+  <div class="comeBack_up" *ngIf="(joblogs$.length ==  0)">
+
+    no record found
+  </div>
+    <div class="search-result">
+      {{joblogs$.length}}
+    <div *ngFor="let currentSubmission of joblogs$; let first=first;" >
+      <mat-accordion>
+        <mat-expansion-panel *ngIf="first">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Seeker : {{currentSubmission.name}}
+            </mat-panel-title>
+            <mat-panel-description>
+              Created On :{{currentSubmission.createdAt}}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          {{currentSubmission.objectiveStatement}}
+    
+          <a mat-raised-button color="warn" [href]="'mailto:'+currentSubmission.email" >click here to contact job seeker</a>
+
+            <!--
+          Tags:
+          <div  *ngFor="let currentTagId of currentSubmission.allTags">
+            <p> {{toppingListByID[currentTagId]}}</p>
+          </div>
+            -->
+         <form [formGroup]="allEditForm" >
+       
+          <div  *ngFor="let job of currentSubmission.job_log">
+            <div *ngIf="editJobs==true">
+            <mat-card >
+              <mat-card-header class="card-container">
+                <mat-card-title class="card-container-left" >Job # {{job.jobnumber}}</mat-card-title>
+
+              </mat-card-header>
+              <!--<div formArrayName="jobs">-->
+                <div formGroupName="{{'joblog-'+currentSubmission._id+'-'+job.jobnumber}}">
+              <mat-card-content>
+                <div style="display:none">
+                <mat-form-field >
+                  <input matInput [hidden]="true"  formControlName="jobNumber">
+                </mat-form-field>
+                </div>
+                <mat-form-field>
+                  <input matInput     (change)="onChangeEvent($event,'joblog-'+currentSubmission.id+'-'+job.jobnumber)"  placeholder="Job Title" formControlName="jobTitle">
+                </mat-form-field>
+                <mat-form-field>
+                  <input matInput     (change)="onChangeEvent($event,'joblog-'+currentSubmission.id+'-'+job.jobnumber)"  placeholder="Company Name" formControlName="companyName">
+                </mat-form-field>
+                <mat-form-field>
+                  <input matInput placeholder="City" formControlName="city">
+                </mat-form-field>
+                <mat-form-field>
+                  <input matInput  placeholder="State" formControlName="state">
+                </mat-form-field>
+                <mat-form-field>
+                  <input matInput formControlName="startDate" [matDatepicker]="startdate" placeholder="Start Date">
+                  <mat-datepicker-toggle matSuffix [for]="startdate"></mat-datepicker-toggle>
+                  <mat-datepicker touchUi="true" #startdate></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field>
+                  <input matInput formControlName="endDate" [matDatepicker]="enddate" placeholder="End Date">
+                  <mat-datepicker-toggle matSuffix [for]="enddate"></mat-datepicker-toggle>
+                  <mat-datepicker touchUi="true" #enddate></mat-datepicker>
+                </mat-form-field>
+
+                <mat-form-field>
+                  <input matInput formControlName="notes" placeholder="Notes" value="{{job.notes}}">
+                </mat-form-field>
+                 <button (click)="onEditSubmit(currentSubmission._id)" > Save New Info</button>   
+                 <button (click)="toggleEdit()">Cancel</button>   
+              </mat-card-content>
+              <a mat-raised-button color="warn" [href]="'mailto:'+currentSubmission.email" >click here to contact job seeker</a>
+                            </div>
+
+            </mat-card>
+            </div>
+            <div  *ngIf="editJobs== false">
+            <mat-card >
+              <mat-card-header class="card-container">
+                <mat-card-title class="card-container-left" >Job # {{job.jobnumber}}</mat-card-title>
+
+              </mat-card-header>
+              <mat-card-content>
+               
+                  <mat-list>
+                    <form>
+                    <mat-list-item> Job Title: {{job.jobtitle}}</mat-list-item>
+                    <mat-list-item> Company: {{job.companyname}}</mat-list-item>
+                    <mat-list-item> City: {{job.city}} </mat-list-item>
+                    <mat-list-item> State: {{job.state}} </mat-list-item>
+                    <mat-list-item> Start Date: {{job.startdate}} </mat-list-item>
+                    <mat-list-item> End Date:  {{job.enddate}} </mat-list-item>
+                    <mat-list-item> Notes {{job.notes}}</mat-list-item>
+                  </form>
+                   </mat-list>             
+         
+              </mat-card-content>
+
+            </mat-card>
+            <a mat-raised-button color="warn" [href]="'mailto:'+currentSubmission.email" >click here to contact job seeker</a>
+
+          </div>
+             <br/>
+  
+             <br/>
+            
+              </div>
+            </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          
+        </mat-expansion-panel>
+        <mat-expansion-panel *ngIf="!first" (opened)="panelOpenState = true"
+                             (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Seeker : {{currentSubmission.name}}
+            </mat-panel-title>
+            <mat-panel-description>
+              Created On :{{currentSubmission.createdAt}}
+
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <a mat-raised-button color="warn" [href]="'mailto:'+currentSubmission.email" >click here to contact job seeker</a>
+
+            <!--
+            Tags:
+          <div  *ngFor="let currentTagId of currentSubmission.allTags">
+            <p> {{toppingListByID[currentTagId]}}</p>
+          </div>
+        -->
+        <form [formGroup]="allEditForm" >
+
+         <div  *ngFor="let job of currentSubmission.job_log">
+           <div *ngIf="editJobs==true">
+           <mat-card >
+             <mat-card-header class="card-container">
+               <mat-card-title class="card-container-left" >Job # {{job.jobnumber}}</mat-card-title>
+               <mat-card-title class="card-container-right"><button mat-button (click)="toggleEdit()">
+                 <mat-icon (click)="toggleEdit()">remove</mat-icon>
+                 
+             </button>
+               </mat-card-title>
+             </mat-card-header>
+             <!--<div formArrayName="jobs">-->
+               <div formGroupName="{{'joblog-'+currentSubmission._id+'-'+job.jobnumber}}">
+             <mat-card-content>
+               <div style="display:none">
+               <mat-form-field >
+                 <input matInput [hidden]="true"  formControlName="jobNumber">
+               </mat-form-field>
+               </div>
+               <mat-form-field>
+                 <input matInput     (change)="onChangeEvent($event,'joblog-'+currentSubmission.id+'-'+job.jobnumber)"  placeholder="Job Title" formControlName="jobTitle">
+               </mat-form-field>
+               <mat-form-field>
+                 <input matInput     (change)="onChangeEvent($event,'joblog-'+currentSubmission.id+'-'+job.jobnumber)"  placeholder="Company Name" formControlName="companyName">
+               </mat-form-field>
+               <mat-form-field>
+                 <input matInput placeholder="City" formControlName="city">
+               </mat-form-field>
+               <mat-form-field>
+                 <input matInput  placeholder="State" formControlName="state">
+               </mat-form-field>
+               <mat-form-field>
+                 <input matInput formControlName="startDate" [matDatepicker]="startdate" placeholder="Start Date">
+                 <mat-datepicker-toggle matSuffix [for]="startdate"></mat-datepicker-toggle>
+                 <mat-datepicker touchUi="true" #startdate></mat-datepicker>
+               </mat-form-field>
+               <mat-form-field>
+                 <input matInput formControlName="endDate" [matDatepicker]="enddate" placeholder="End Date">
+                 <mat-datepicker-toggle matSuffix [for]="enddate"></mat-datepicker-toggle>
+                 <mat-datepicker touchUi="true" #enddate></mat-datepicker>
+               </mat-form-field>
+
+               <mat-form-field>
+                 <input matInput formControlName="notes" placeholder="Notes" value="{{job.notes}}">
+               </mat-form-field>
+                <button (click)="onEditSubmit(currentSubmission._id)" > Save New Info</button>   
+                <button (click)="toggleEdit()">Cancel</button>   
+             </mat-card-content>
+                           </div>
+
+           </mat-card>
+           </div>
+           <div  *ngIf="editJobs== false">
+           <mat-card >
+             <mat-card-header class="card-container">
+               <mat-card-title class="card-container-left" >Job # {{job.jobnumber}}</mat-card-title>
+
+             </mat-card-header>
+             <mat-card-content>
+              
+                 <mat-list>
+                   <form>
+                   <mat-list-item> Job Title: {{job.jobtitle}}</mat-list-item>
+                   <mat-list-item> Company: {{job.companyname}}</mat-list-item>
+                   <mat-list-item> City: {{job.city}} </mat-list-item>
+                   <mat-list-item> State: {{job.state}} </mat-list-item>
+                   <mat-list-item> Start Date: {{job.startdate}} </mat-list-item>
+                   <mat-list-item> End Date:  {{job.enddate}} </mat-list-item>
+                   <mat-list-item> Notes {{job.notes}}</mat-list-item>
+<!--
+                   <mat-list-item> Tags:          
+                     <div  *ngFor="let currentTagId of job.tags">
+                         <p> {{toppingListByID[currentTagId]}}</p>
+                     </div>
+                   </mat-list-item>-->
+                 </form>
+                  </mat-list>             
+        
+             </mat-card-content>
+           </mat-card>
+           <a mat-raised-button color="warn" [href]="'mailto:'+currentSubmission.email" >click here to contact job seeker</a>
+
+         </div>
+            <br/>
+ 
+            <br/>
+           
+             </div>
+           </form>
+
+
+        </mat-expansion-panel>
+
+      </mat-accordion>
+      
+      
+      
+      
+      
+      
+      
+      
+    </div>
+     
+     
+  
+  </div>

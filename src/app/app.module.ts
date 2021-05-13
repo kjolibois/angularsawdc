@@ -50,8 +50,11 @@ import { VCWCHomeComponent } from './components/page_components/vcwc/vcwc.compon
 import { AllHomeComponent } from './components/page_components/allhome/allhome.component';
 import { SAWDCResumesearchComponent } from './components/sawdc/sawdc-resumesearch/sawdc-resumesearch.component';
 import { SAWDCResumeadminComponent } from './components/sawdc/sawdc-resumeadmin/sawdc-resumeadmin.component';
-import {VCWCResumesearchComponent} from './components/vcwc/vcwc-resumesearch/vcwc-resumesearch.component'
-import {VCWCResumeadminComponent} from './components/vcwc/vcwc-resumeadmin/vcwc-resumeadmin.component'
+import {VCWCEmailSearchComponent} from './components/vcwc/vcwc-resume-email-search/vcwc-resume-email-search.component'
+import {VCWCTagSearchComponent} from './components/vcwc/vcwc-resume-tag-search/vcwc-resume-tag-search.component'
+
+import {VCWCResumeadminComponent} from './components/vcwc/vcwc-resumeadmin/vcwc-resumeadmin.component';
+import { ChipSelectComponent } from './components/chip-select/chip-select.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -69,11 +72,14 @@ import {VCWCResumeadminComponent} from './components/vcwc/vcwc-resumeadmin/vcwc-
     ProfileComponent,
     HomeComponent,
     VCWCHomeComponent,
-    VCWCResumeadminComponent,
-    VCWCResumesearchComponent,
+    VCWCResumeadminComponent,    
+    VCWCTagSearchComponent,
+    VCWCEmailSearchComponent,
+
     AllHomeComponent,
     SAWDCResumesearchComponent,
     SAWDCResumeadminComponent,
+    ChipSelectComponent,
     
   ],
   imports: [
