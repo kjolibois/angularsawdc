@@ -1,5 +1,8 @@
 <div id="search-component">
+  <header>
     <h4><label for="search-box">Resume Search</label></h4>
+  </header>
+  <p>Select your Job Categories from the drop-down below, then hit <b>Search</b></p>
     <mat-form-field>
       <mat-label>Job Categories</mat-label>
       <mat-select #sl [formControl]="toppingsControl" multiple>
@@ -13,7 +16,7 @@
             </mat-chip>
           </mat-chip-list>
         </mat-select-trigger>
-    
+        <button (click)="sl.close()">Apply</button>
         <mat-option *ngFor="let topping of toppingList" [value]="topping"> {{topping.viewValue}}</mat-option>
     		<button (click)="sl.close()">Apply</button>
 
@@ -29,28 +32,24 @@
     
     <br/>
     <button mat-button (click)="getResumesByTags(toppingsControl.value)">Search</button>
-    <button mat-button (click)="emptySelection()">Empty</button>
+    <button class="empty-s" mat-button (click)="emptySelection()">Empty</button>
   <div class="comeBack_up" *ngIf="(joblogs$.length ==  0)">
-
-    no record found
   </div>
     <div class="search-result">
-      {{joblogs$.length}}
+      <h5>There was {{joblogs$.length}} Job Seekers found</h5>
     <div *ngFor="let currentSubmission of joblogs$; let first=first;" >
       <mat-accordion>
         <mat-expansion-panel *ngIf="first">
           <mat-expansion-panel-header>
             <mat-panel-title>
-              Seeker : {{currentSubmission.name}}
+              {{currentSubmission.name}} <a mat-raised-button color="warn" [href]="'mailto:'+currentSubmission.email" [target]="_blank"><mat-icon aria-hidden="false" aria-label="mail icon">mail</mat-icon></a>
             </mat-panel-title>
             <mat-panel-description>
-              Created On :{{currentSubmission.createdAt}}
+              <p>Hi! I'm ready to further my career!</p>
             </mat-panel-description>
           </mat-expansion-panel-header>
           {{currentSubmission.objectiveStatement}}
-    
-          <a mat-raised-button color="warn" [href]="'mailto:'+currentSubmission.email" >click here to contact job seeker</a>
-
+          <p>Hi! I'm ready to further my career!</p>
             <!--
           Tags:
           <div  *ngFor="let currentTagId of currentSubmission.allTags">
@@ -103,7 +102,7 @@
                  <button (click)="onEditSubmit(currentSubmission._id)" > Save New Info</button>   
                  <button (click)="toggleEdit()">Cancel</button>   
               </mat-card-content>
-              <a mat-raised-button color="warn" [href]="'mailto:'+currentSubmission.email" >click here to contact job seeker</a>
+              <a mat-raised-button color="warn" [href]="'mailto:'+currentSubmission.email" >Click here to contact this Job Seeker</a>
                             </div>
 
             </mat-card>
@@ -118,20 +117,20 @@
                
                   <mat-list>
                     <form>
-                    <mat-list-item> Job Title: {{job.jobtitle}}</mat-list-item>
-                    <mat-list-item> Company: {{job.companyname}}</mat-list-item>
-                    <mat-list-item> City: {{job.city}} </mat-list-item>
-                    <mat-list-item> State: {{job.state}} </mat-list-item>
-                    <mat-list-item> Start Date: {{job.startdate}} </mat-list-item>
-                    <mat-list-item> End Date:  {{job.enddate}} </mat-list-item>
-                    <mat-list-item> Notes {{job.notes}}</mat-list-item>
+                    <mat-list-item> <b>Job Title: </b> {{job.jobtitle}}</mat-list-item>
+                    <mat-list-item> <b>Company: </b> {{job.companyname}}</mat-list-item>
+                    <mat-list-item> <b>City: </b> {{job.city}} </mat-list-item>
+                    <mat-list-item> <b>State: </b> {{job.state}} </mat-list-item>
+                    <mat-list-item> <b>Start Date: </b> {{job.startdate}} </mat-list-item>
+                    <mat-list-item> <b>End Date: </b>  {{job.enddate}} </mat-list-item>
+                    <mat-list-item> <b>Notes: </b> {{job.notes}}</mat-list-item>
                   </form>
                    </mat-list>             
          
               </mat-card-content>
 
             </mat-card>
-            <a mat-raised-button color="warn" [href]="'mailto:'+currentSubmission.email" >click here to contact job seeker</a>
+            <a mat-raised-button color="warn"  class="ex-con" [href]="'mailto:'+currentSubmission.email" >Click here to contact this Job Seeker</a>
 
           </div>
              <br/>
@@ -140,37 +139,20 @@
             
               </div>
             </form>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
           
         </mat-expansion-panel>
         <mat-expansion-panel *ngIf="!first" (opened)="panelOpenState = true"
                              (closed)="panelOpenState = false">
           <mat-expansion-panel-header>
             <mat-panel-title>
-              Seeker : {{currentSubmission.name}}
+              {{currentSubmission.name}} <a mat-raised-button color="warn" [href]="'mailto:'+currentSubmission.email" [target]="_blank"><mat-icon aria-hidden="false" aria-label="mail icon">mail</mat-icon></a>
             </mat-panel-title>
             <mat-panel-description>
-              Created On :{{currentSubmission.createdAt}}
-
+              <p>Hi! I'm ready to further my career!</p>
             </mat-panel-description>
           </mat-expansion-panel-header>
-          <a mat-raised-button color="warn" [href]="'mailto:'+currentSubmission.email" >click here to contact job seeker</a>
-
+          {{currentSubmission.objectiveStatement}}
+          <p>Hi! I'm ready to further my career!</p>
             <!--
             Tags:
           <div  *ngFor="let currentTagId of currentSubmission.allTags">
@@ -259,7 +241,7 @@
         
              </mat-card-content>
            </mat-card>
-           <a mat-raised-button color="warn" [href]="'mailto:'+currentSubmission.email" >click here to contact job seeker</a>
+           <a mat-raised-button class="ex-con" color="warn" [href]="'mailto:'+currentSubmission.email" >Click here to contact this Job Seeker</a>
 
          </div>
             <br/>
