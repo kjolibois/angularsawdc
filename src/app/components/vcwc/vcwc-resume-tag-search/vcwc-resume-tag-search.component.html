@@ -47,8 +47,9 @@
               Created On :{{currentSubmission.createdAt | date}}
             </mat-panel-description>
           </mat-expansion-panel-header>
+          Personal Statement:
           {{currentSubmission.objectiveStatement}}
-    
+    <p>Highly organized individual with excellent communication skills and High School Diploma. Seeking an Administrative Assistant position with Sherpa, to leverage on superior administrative skills and 4+ years experience to foster smooth office operations. Also coming with advance knowledge of Microsoft Office tools.</p>
           <a mat-raised-button color="warn" [href]="'mailto:'+currentSubmission.email" >click here to contact job seeker</a>
 
             <!--
@@ -169,6 +170,12 @@
 
             </mat-panel-description>
           </mat-expansion-panel-header>
+          Personal Statement:
+
+          {{currentSubmission.objectiveStatement}}
+
+          <p>Highly organized individual with excellent communication skills and High School Diploma. Seeking an Administrative Assistant position with Sherpa, to leverage on superior administrative skills and 4+ years experience to foster smooth office operations. Also coming with advance knowledge of Microsoft Office tools.</p>
+
           <a mat-raised-button color="warn" [href]="'mailto:'+currentSubmission.email" >click here to contact job seeker</a>
 
             <!--
