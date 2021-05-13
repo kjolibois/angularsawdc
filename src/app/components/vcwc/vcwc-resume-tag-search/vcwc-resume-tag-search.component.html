@@ -44,7 +44,7 @@
               Seeker : {{currentSubmission.name}}
             </mat-panel-title>
             <mat-panel-description>
-              Created On :{{currentSubmission.createdAt}}
+              Created On :{{currentSubmission.createdAt | date}}
             </mat-panel-description>
           </mat-expansion-panel-header>
           {{currentSubmission.objectiveStatement}}
@@ -165,7 +165,7 @@
               Seeker : {{currentSubmission.name}}
             </mat-panel-title>
             <mat-panel-description>
-              Created On :{{currentSubmission.createdAt}}
+              Created On :{{currentSubmission.createdAt | date}}
 
             </mat-panel-description>
           </mat-expansion-panel-header>
