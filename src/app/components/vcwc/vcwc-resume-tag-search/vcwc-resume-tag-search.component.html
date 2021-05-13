@@ -121,8 +121,8 @@
                     <mat-list-item> <b>Company: </b> {{job.companyname}}</mat-list-item>
                     <mat-list-item> <b>City: </b> {{job.city}} </mat-list-item>
                     <mat-list-item> <b>State: </b> {{job.state}} </mat-list-item>
-                    <mat-list-item> <b>Start Date: </b> {{job.startdate}} </mat-list-item>
-                    <mat-list-item> <b>End Date: </b>  {{job.enddate}} </mat-list-item>
+                    <mat-list-item> <b>Start Date: </b> {{job.startdate  | date}} </mat-list-item>
+                    <mat-list-item> <b>End Date: </b>  {{job.enddate  | date}} </mat-list-item>
                     <mat-list-item> <b>Notes: </b> {{job.notes}}</mat-list-item>
                   </form>
                    </mat-list>             
