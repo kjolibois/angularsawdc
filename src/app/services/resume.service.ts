@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 //`https://careerext.herokuapp.com/${region}/api/careerlog`
 const baseUrl = function(region){
-  return `http://localhost:8090/${region}/api/careerlog`;
+  return `https://careerext.herokuapp.com/${region}/api/careerlog`;
 }
   const options = {
   headers: new HttpHeaders({
@@ -29,8 +29,8 @@ export class ResumeService {
     return this.http.get(`${baseUrl(region)}/il/${email}`);
   }
   getByTags(region,tags): Observable<any> {
-    console.log(tags)
-    return this.http.post(`${baseUrl(region)}/tagsearch`,tags);
+    console.log(baseUrl(region))
+    return this.http.post(`${baseUrl(region)}/ts/tagsearch`,tags);
   }
   create(region,data): Observable<any> {
     return this.http.post(baseUrl(region), data);
